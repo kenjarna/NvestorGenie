@@ -6,6 +6,7 @@ import ReportHandler from './ReportHandler';
 import Analysis from './StockAnalysis';
 
 const Main = (props) => {
+    console.log(props)
     return (
         <div>
             <p>Testing Main.js</p>
