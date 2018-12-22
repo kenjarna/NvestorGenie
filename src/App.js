@@ -10,7 +10,7 @@ class App extends Component {
     super()
 
     this.state = {
-      portfolio: [],
+      portfolio: {},
     }
   }
 
@@ -20,13 +20,24 @@ class App extends Component {
                   const portfolio = this.state.portfolio;
                   portfolio['AAPL'] = response.data.quote;
                   this.setState({portfolio})});
+    let data2 = await axios.get('https://api.iextrading.com/1.0/stock/amzn/batch?types=quote')
+              .then(response => { 
+                  const portfolio = this.state.portfolio;
+                  portfolio['AMZN'] = response.data.quote;
+                  this.setState({portfolio})});
   }
   
   render() {
+    const actions = {
+      updatePortfolio: this.updatePortfolio,
+    }
+    console.log(this.state.portfolio)
     return (
       <div className="App">
-        <button onClick={this.updatePortfolio}>Click Me!</button>
-        <Main {...this.state}/>
+        <Main 
+          {...actions}
+          {...this.state}
+        />
       </div>
     );
   }

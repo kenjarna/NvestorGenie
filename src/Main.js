@@ -6,11 +6,15 @@ import ReportHandler from './ReportHandler';
 import Analysis from './StockAnalysis';
 
 const Main = (props) => {
-    console.log(props)
+    const stockProps = {
+        updatePortfolio: props.updatePortfolio,
+    }
     return (
         <div>
             <p>Testing Main.js</p>
-            <StockFetcher />
+            <StockFetcher 
+                updatePortfolio = {stockProps.updatePortfolio}
+            />
             <ReportHandler />
             <Analysis />
         </div>
