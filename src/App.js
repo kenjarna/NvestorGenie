@@ -29,6 +29,7 @@ class App extends Component {
   }
   
   render() {
+    console.log(this.state)
     const actions = {
       updatePortfolio: this.updatePortfolio,
     }
