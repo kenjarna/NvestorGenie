@@ -16,20 +16,36 @@ class StockFetcher extends Component {
         ev.preventDefault();
 
         var ticker = document.getElementById('stock-ticker').value.toUpperCase();
-        this.filterStock(ticker)
-        // this.props.updatefilteredPortfolio(ticker);
+        this.saveStockInfo(ticker)
 
         ev.target.reset();
     }
 
-    filterStock = async symbol => {
-        console.log(symbol)
-        let data = axios.get('https://api.iextrading.com/1.0/stock/'+ symbol + '/batch?types=quote')
-                    .then(response => { 
-                        const filteredPortfolio = this.state.filteredPortfolio;
-                        filteredPortfolio[symbol] = response.data.quote;
-                        this.setState({filteredPortfolio})});
+    saveStockInfo = async symbol => {
+        axios.get('https://api.iextrading.com/1.0/stock/'+ symbol + '/batch?types=quote')
+                .then(response => { 
+                    const filteredPortfolio = this.state.filteredPortfolio;
+                    const filteredStock = this.filterStock(response.data.quote)
+                    filteredPortfolio[symbol] = filteredStock;
+                    this.setState({filteredPortfolio})});
         this.props.updatePortfolio(this.state.filteredPortfolio)
+    }
+
+    filterStock = (data) => {
+        const stock = {
+            ticker: data.symbol,
+            companyName: data.companyName,
+            latestTime: data.latestTime,
+            primaryExchange: data.primaryExchange,
+            latestPrice: data.latestPrice,
+            peRatio: data.peRatio,
+            week52High: data.week52High,
+            week52Low: data.week52Low,
+            ytdChange: data.ytdChange,
+            close: data.close,
+            open: data.open,
+        };
+        return stock;
     }
 
     render() {

@@ -22,8 +22,8 @@ class App extends Component {
     const actions = {
       updatePortfolio: this.updatePortfolio,
     }
-
     return (
+      
       <div className="App">
         <Main 
           {...actions}
