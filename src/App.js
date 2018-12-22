@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import './App.css';
 
@@ -14,26 +13,16 @@ class App extends Component {
     }
   }
 
-  updatePortfolio = async symbol =>  {
-    console.log(symbol)
-    let data = await axios.get('https://api.iextrading.com/1.0/stock/aapl/batch?types=quote')
-              .then(response => { 
-                  const portfolio = this.state.portfolio;
-                  portfolio['AAPL'] = response.data.quote;
-                  this.setState({portfolio})});
-    let data2 = await axios.get('https://api.iextrading.com/1.0/stock/amzn/batch?types=quote')
-              .then(response => { 
-                  const portfolio = this.state.portfolio;
-                  portfolio['AMZN'] = response.data.quote;
-                  this.setState({portfolio})});
+  //Action handed to StockFetcher component to set app's state to the filtered stock information
+  updatePortfolio = (filtereddata) =>  {
+    this.setState({portfolio:filtereddata});
   }
   
   render() {
-    console.log(this.state)
     const actions = {
       updatePortfolio: this.updatePortfolio,
     }
-    console.log(this.state.portfolio)
+
     return (
       <div className="App">
         <Main 
