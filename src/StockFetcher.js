@@ -17,7 +17,7 @@ class StockFetcher extends Component {
 
         var ticker = document.getElementById('stock-ticker').value.toUpperCase();
         var shares = document.getElementById('num-shares').value;
-        this.saveStockInfo(ticker,shares)
+        this.saveStockInfo(ticker,shares);
 
         ev.target.reset();
     }
@@ -27,9 +27,9 @@ class StockFetcher extends Component {
                 .then(response => { 
                     const filteredPortfolio = this.state.filteredPortfolio;
                     const filteredStock = this.filterStock(response.data.quote,numShares)
-                    filteredPortfolio[symbol] = filteredStock;
+                    const analyzedStock = this.analyzeStock(filteredStock);
+                    filteredPortfolio[symbol] = analyzedStock;
                     this.setState({filteredPortfolio})});
-        this.props.updatePortfolio(this.state.filteredPortfolio)
     }
 
     //Additonal Data needed: 
@@ -66,8 +66,8 @@ class StockFetcher extends Component {
     * Expected Market Returns
     * Portion of portfolio
     */
-    anlyzeStock = (stock) => {
-
+    analyzeStock = (stockObj) => {
+        console.log(stockObj);
     }
 
     render() {
