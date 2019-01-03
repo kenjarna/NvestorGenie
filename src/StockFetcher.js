@@ -9,6 +9,7 @@ class StockFetcher extends Component {
 
         this.state = {
             filteredPortfolio: {},
+            totalInvestment: 0,
         }
     }
 
@@ -25,11 +26,14 @@ class StockFetcher extends Component {
     saveStockInfo = async (symbol,numShares) => {
         axios.get('https://api.iextrading.com/1.0/stock/'+ symbol + '/batch?types=quote')
                 .then(response => { 
-                    const filteredPortfolio = this.state.filteredPortfolio;
-                    const filteredStock = this.filterStock(response.data.quote,numShares)
-                    const analyzedStock = this.analyzeStock(filteredStock);
-                    filteredPortfolio[symbol] = analyzedStock;
-                    this.setState({filteredPortfolio})});
+                    const basicStats = response.data.quote;
+                    axios.get('https://api.iextrading.com/1.0/stock/'+symbol+'/stats')
+                            .then(response => {
+                                const investmentAmount = numShares*basicStats.latestPrice;
+                                const filteredStock = this.filterStock(basicStats, numShares, response.data,investmentAmount);
+                                const analzyedStock = this.analyzeStock(filteredStock);
+                            });
+        });
     }
 
     //Additonal Data needed: 
@@ -39,7 +43,7 @@ class StockFetcher extends Component {
     * Number of shares purchased
     * 
     */
-    filterStock = (data,numShares) => {
+    filterStock = (data,numShares,additionalStats, investmentAmount) => {
         const stock = {
             ticker: data.symbol,
             companyName: data.companyName,
@@ -53,8 +57,15 @@ class StockFetcher extends Component {
             close: data.close,
             open: data.open,
             numShares: numShares,
+            beta: additionalStats.beta,
+            dividendRate: additionalStats.dividendRate,
+            dividendYield: additionalStats.dividendYield,
+            latestEPS: additionalStats.latestEPS,
+            latestEPSDate: additionalStats.latestEPSDate,
+            investmentAmount: investmentAmount,
         };
         return stock;
+        
     }
 
     /* Items to calculate
@@ -66,8 +77,16 @@ class StockFetcher extends Component {
     * Expected Market Returns
     * Portion of portfolio
     */
-    analyzeStock = (stockObj) => {
-        console.log(stockObj);
+    analyzeStock = (filteredStock) => {
+        var totalInvestment = this.state.totalInvestment;
+
+        totalInvestment += filteredStock.investmentAmount;
+        this.setState({totalInvestment});
+
+        //Need to update other stocks once this is calculated
+        const portionPortfolio = filteredStock.investmentAmount/totalInvestment*100
+        filteredStock.portionPortfolio = portionPortfolio;
+        console.log('Total:',totalInvestment,' Portion:',portionPortfolio);
     }
 
     render() {

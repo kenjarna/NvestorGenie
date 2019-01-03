@@ -9,13 +9,13 @@ class App extends Component {
     super()
 
     this.state = {
-      portfolio: {},
+      analyzedPortfolio: {},
     }
   }
 
   //Action handed to StockFetcher component to set app's state to the filtered stock information
   updatePortfolio = (filtereddata) =>  {
-    this.setState({portfolio:filtereddata});
+    this.setState({analyzedPortfolio:filtereddata});
   }
   
   render() {
