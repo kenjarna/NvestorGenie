@@ -16,22 +16,30 @@ class StockFetcher extends Component {
         ev.preventDefault();
 
         var ticker = document.getElementById('stock-ticker').value.toUpperCase();
-        this.saveStockInfo(ticker)
+        var shares = document.getElementById('num-shares').value;
+        this.saveStockInfo(ticker,shares)
 
         ev.target.reset();
     }
 
-    saveStockInfo = async symbol => {
+    saveStockInfo = async (symbol,numShares) => {
         axios.get('https://api.iextrading.com/1.0/stock/'+ symbol + '/batch?types=quote')
                 .then(response => { 
                     const filteredPortfolio = this.state.filteredPortfolio;
-                    const filteredStock = this.filterStock(response.data.quote)
+                    const filteredStock = this.filterStock(response.data.quote,numShares)
                     filteredPortfolio[symbol] = filteredStock;
                     this.setState({filteredPortfolio})});
         this.props.updatePortfolio(this.state.filteredPortfolio)
     }
 
-    filterStock = (data) => {
+    //Additonal Data needed: 
+    /* Beta
+    * Expected growth return
+    * 1 year expected growth
+    * Number of shares purchased
+    * 
+    */
+    filterStock = (data,numShares) => {
         const stock = {
             ticker: data.symbol,
             companyName: data.companyName,
@@ -44,16 +52,31 @@ class StockFetcher extends Component {
             ytdChange: data.ytdChange,
             close: data.close,
             open: data.open,
+            numShares: numShares,
         };
         return stock;
+    }
+
+    /* Items to calculate
+    * Total Invested
+    * Expected Portfolio Beta
+    * Calculated Portfolio Expected Return
+    * Risk Free Rate
+    * Expected Annual Return
+    * Expected Market Returns
+    * Portion of portfolio
+    */
+    anlyzeStock = (stock) => {
+
     }
 
     render() {
         return (
             <div>
                 <p>Testing StockFetcher (for IEXFinance API)</p>
-                <form className="stock-ticker-form" onSubmit={this.handleFormSubmit.bind(this)}>
-                    <input className="stock-ticker" id ="stock-ticker" placeholder="Enter a stock symbol . . ."/>
+                <form className="stock-form" onSubmit={this.handleFormSubmit.bind(this)}>
+                    <input className="stock-form" id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
+                    <input className="stock-form" id ="num-shares" placeholder="Enter number of shares . . ." required/>
                     <input type="submit"/>
                 </form>
             </div>
