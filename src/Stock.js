@@ -24,11 +24,15 @@ export default class Stock {
         this.fetchStockInfo();
     }
     async fetchStockInfo() {
+        //Need to handle when the ticker symbol is not found. 
+        //Not sure what payload is delivered in this case.
         try {
             axios.get('https://api.iextrading.com/1.0/stock/' + this.ticker + '/batch?types=quote')
-        } catch(err){
-            console.log("Information on", this.ticker, " could not be found. Please be sure you typed the ticker symbol correctly");
-        }
+                .then(response => {
+                    console.log(response);
+                    this.setStockInfo(response);
+                });
+        } catch (err) { console.log(err);}
             
     }
     setStockInfo(fetchedInfo) {
