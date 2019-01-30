@@ -25,11 +25,10 @@ export default class Stock {
     }
     async fetchStockInfo() {
         //Need to handle when the ticker symbol is not found. 
-        //Not sure what payload is delivered in this case.
+        // Not sure what payload is delivered in this case.
         try {
             axios.get('https://api.iextrading.com/1.0/stock/' + this.ticker + '/batch?types=quote')
                 .then(response => {
-                    console.log(response);
                     this.setStockInfo(response);
                 });
         } catch (err) { console.log(err);}
@@ -53,6 +52,5 @@ export default class Stock {
         this.openPrice = stats.open;
         this.investmentAmount = this.latestPrice * this.numShares;
     }
-    
 }
 

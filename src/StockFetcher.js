@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Stock from './Stock.js';
+import Portfolio from './Portfolio.js';
 
-
+let portfolio = new Portfolio();
 class StockFetcher extends Component {
     
     constructor(props) {
@@ -18,9 +18,21 @@ class StockFetcher extends Component {
 
         let ticker = document.getElementById('stock-ticker').value.toUpperCase();
         let shares = document.getElementById('num-shares').value;
-        console.log(new Stock(ticker, shares));
+        
+        portfolio.addStock(ticker, shares);
+        this.setState({filteredPortfolio:portfolio})
 
         ev.target.reset();
+    }
+
+    componentDidUpdate() {
+        let stockList = portfolio.stockList;
+        let totalAmount = 0;
+        for (let i in stockList) {
+            totalAmount += stockList[i].investmentAmount;
+        }
+        console.log(totalAmount);
+        //this.setState({ totalInvestment: totalAmount });
     }
 
     //savestockinfo = async (symbol,numshares) => {
