@@ -5,12 +5,10 @@ export default class Portfolio {
         this.stockList = {};
         this.totalValue = 0;
     }
-    async addStock(ticker, numshares) {
-        let stock = await( new Stock(ticker, numshares));
+    addStock(ticker, numshares) {
+        let stock = new Stock(ticker, numshares);
         this.stockList[stock.ticker] = stock;
         this.totalValue += stock.investmentAmount;
-
-        
     }
     updateStats() {
         for (let i in this.stockList) {
