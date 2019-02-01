@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-
 import './App.css';
-
 import Main from './Main'
 
 class App extends Component {
   constructor() {
     super()
-
+    
     this.state = {
-      analyzedPortfolio: {},
-    }
+      portfolio: {},
+      }
+
+      this.updatePortfolio = this.updatePortfolio.bind(this);
   }
 
   //Action handed to StockFetcher component to set app's state to the filtered stock information
-  updatePortfolio = (filtereddata) =>  {
-    this.setState({analyzedPortfolio:filtereddata});
+  updatePortfolio = (data) =>  {
+    this.setState({portfolio:data});
   }
   
   render() {

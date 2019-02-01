@@ -6,7 +6,6 @@ class StockFetcher extends Component {
     
     constructor(props) {
         super(props);
-
         this.state = {
             filteredPortfolio: {},
             totalInvestment: 0,
@@ -19,11 +18,12 @@ class StockFetcher extends Component {
         let ticker = document.getElementById('stock-ticker').value.toUpperCase();
         let shares = document.getElementById('num-shares').value;
         
-        this.updatePortfolio(ticker, shares);
+        this.amendPortfolio(ticker, shares);
+        
 
         ev.target.reset();
     }
-    async updatePortfolio(ticker, shares) {
+    async amendPortfolio(ticker, shares) {
         await (portfolio.addStock(ticker, shares));
         this.setState({
             filteredPortfolio: portfolio,
@@ -31,6 +31,9 @@ class StockFetcher extends Component {
         });
     }
 
+    componentDidUpdate() {
+        this.props.updatePortfolio();
+    }
 
     render() {
         return (
