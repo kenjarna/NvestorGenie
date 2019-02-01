@@ -4,42 +4,40 @@ const baseAPILink = 'https://api.iextrading.com/1.0/stock/';
 const quoteLink = '/batch?types=quote';
 const stockStatsLink = '/stats';
 
-export default class Stock {
+export default class Stock{
     
-    constructor(symbol,shares) {
+    constructor(symbol, shares) {
         this.ticker = symbol;
         this.numShares = shares;
-        this.companyName = null;
-        this.latestTime = null;
-        this.primaryExchange = null;
-        this.latestPrice = null;
-        this.PERatio = null;
-        this.week52High = null;
-        this.week52Low = null;
-        this.ytdChange = null;
-        this.closePrice = null;
-        this.openPrice = null;
-        this.beta = null;
-        this.dividendRate = null;
-        this.dividendYield = null;
-        this.latestEPS = null;
-        this.latestEPSDate = null;
-        this.investmentAmount = null;
-
-        this.fetchStockInfo();
+        this.companyName = '';
+        this.latestTime = 0;
+        this.primaryExchange = 0;
+        this.latestPrice = 0;
+        this.PERatio = 0;
+        this.week52High = 0;
+        this.week52Low = 0;
+        this.ytdChange = 0;
+        this.closePrice = 0;
+        this.openPrice = 0;
+        this.beta = 0;
+        this.dividendRate = 0;
+        this.dividendYield = 0;
+        this.latestEPS = 0;
+        this.latestEPSDate = 0;
+        this.investmentAmount = 0;  
     }
     async fetchStockInfo() {
         //Need to handle when the ticker symbol is not found. 
         // Not sure what payload is delivered in this case.
         try {
-            axios.get(this.buildLink('quote', this.ticker))
+            await(axios.get(this.buildLink('quote', this.ticker))
                 .then(response => {
                     this.setStockInfo(response);
-                });
-            axios.get(this.buildLink('stats',this.ticker))
+                }));
+            await(axios.get(this.buildLink('stats',this.ticker))
                 .then(response => {
                     this.setStockInfo(response);
-                });
+                }));
 
         } catch (err) { console.log(err);}
             
