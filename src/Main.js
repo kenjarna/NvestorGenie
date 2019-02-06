@@ -15,7 +15,10 @@ const Main = (props) => {
                 updatePortfolio={props.updatePortfolio}
                 portfolio={props.portfolio}
             />
-            <StockList stocks={props.portfolio} />
+            <StockList
+                stocks={props.portfolio}
+                removeStock={props.removeStock}
+            />
         </div>
     )
 }

@@ -1,9 +1,8 @@
 import React from 'react';
 import StockItem from './StockListItem';
 
-const StockList = ({ stocks }) => {
-
-    const stockTickers = Object.keys(stocks.stockList);
+const StockList = (props) => {
+    const stockTickers = Object.keys(props.stocks.stockList);
 
     return (
         <div className="stock-list">
@@ -12,9 +11,13 @@ const StockList = ({ stocks }) => {
                 {stockTickers.map(ticker => (
                     <StockItem
                         key={ticker}
-                        stock={stocks.stockList[ticker]}
+                        stock={props.stocks.stockList[ticker]}
+                        removeStock={props.removeStock}
+                        
                     />
+
                 ))}
+
             </ul>
         </div>
     )
