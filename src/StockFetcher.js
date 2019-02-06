@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import Portfolio from './Portfolio.js';
 
-let portfolio = new Portfolio();
+
 class StockFetcher extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            filteredPortfolio: {},
+            fetchedPortfolio: props.portfolio,
             totalInvestment: 0,
-        }
+        };
+
     }
 
     handleFormSubmit(ev) {
@@ -17,25 +18,24 @@ class StockFetcher extends Component {
 
         let ticker = document.getElementById('stock-ticker').value.toUpperCase();
         let shares = document.getElementById('num-shares').value;
+       
+
         
         this.amendPortfolio(ticker, shares);
         
 
         ev.target.reset();
     }
-    async amendPortfolio(ticker, shares) {
-        await (portfolio.addStock(ticker, shares));
-        this.setState({
-            filteredPortfolio: portfolio,
-            totalInvestment: portfolio.totalValue
-        });
+    amendPortfolio(ticker, shares) {
+        this.state.fetchedPortfolio.addStock(ticker, shares);
+        
+        this.props.updatePortfolio(this.state.fetchedPortfolio);
     }
 
-    componentDidUpdate() {
-        this.props.updatePortfolio();
-    }
+
 
     render() {
+        
         return (
             <div>
                 <p>Please enter a stock's ticker symbol and the amount of shares you plan to purchase below!</p>

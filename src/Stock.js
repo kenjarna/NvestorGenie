@@ -26,18 +26,17 @@ export default class Stock{
         this.latestEPSDate = 0;
         this.investmentAmount = 0;  
     }
+
+    //Look into observer methods to automatically update the portfolio's values when Stock object changes
+    //Can fake the axios request to test the async
     async fetchStockInfo() {
         //Need to handle when the ticker symbol is not found. 
         // Not sure what payload is delivered in this case.
         try {
-            await(axios.get(this.buildLink('quote', this.ticker))
-                .then(response => {
-                    this.setStockInfo(response);
-                }));
-            await(axios.get(this.buildLink('stats',this.ticker))
-                .then(response => {
-                    this.setStockInfo(response);
-                }));
+            let quote = await (axios.get(this.buildLink('quote', this.ticker)));
+            let stats = await (axios.get(this.buildLink('stats', this.ticker)));
+            this.setBasicStats(quote);
+            this.setStockInfo(stats);
 
         } catch (err) { console.log(err);}
             
@@ -50,39 +49,28 @@ export default class Stock{
             return baseAPILink + ticker + stockStatsLink;
         }
     }
-    setStockInfo(fetchedInfo) {
-        //If the data has a quote object, the information is from the first request.
-        if (fetchedInfo.data.quote != null) {
-            this.setStats(fetchedInfo.data.quote);
-        }
-        //If the data has an EBITDA attribute, the information is from the second request.
-        else if (fetchedInfo.data.EBITDA != null) {
-            this.setStats(fetchedInfo.data);
-        } 
+    //Setup a spy to determine if this method was called (by the fetchStockInfo fcn)
+    setBasicStats(quote) {
+        this.companyName = quote.companyName;
+        this.latestTime = quote.latestTime;
+        this.primaryExchange = quote.primaryExchange;
+        this.latestPrice = quote.latestPrice;
+        this.PERatio = quote.peRatio;
+        this.week52High = quote.week52High;
+        this.week52Low = quote.week52Low;
+        this.ytdChange = quote.ytdChange;
+        this.closePrice = quote.close;
+        this.openPrice = quote.open;
+        this.investmentAmount = this.latestPrice * this.numShares;
     }
 
 
-    setStats(stats) {
-        if (stats.latestTime != null) {
-            this.companyName = stats.companyName;
-            this.latestTime = stats.latestTime;
-            this.primaryExchange = stats.primaryExchange;
-            this.latestPrice = stats.latestPrice;
-            this.PERatio = stats.peRatio;
-            this.week52High = stats.week52High;
-            this.week52Low = stats.week52Low;
-            this.ytdChange = stats.ytdChange;
-            this.closePrice = stats.close;
-            this.openPrice = stats.open;
-            this.investmentAmount = this.latestPrice * this.numShares;
-        }
-        else if (stats.beta != null) {
-            this.beta = stats.beta;
-            this.dividendRate = stats.dividendRate;
-            this.dividendYield = stats.dividendYield;
-            this.latestEPS = stats.latestEPS;
-            this.latestEPSDate = stats.latestEPSDate;
-        }   
+    setStockInfo(stats) {
+        this.beta = stats.beta;
+        this.dividendRate = stats.dividendRate;
+        this.dividendYield = stats.dividendYield;
+        this.latestEPS = stats.latestEPS;
+        this.latestEPSDate = stats.latestEPSDate;    
     }
 }
 
