@@ -7,7 +7,6 @@ import Analysis from './StockAnalysis';
 import StockList from './StockList';
 
 const Main = (props) => {
-    console.log(props.portfolio);
     return (
         <div>
             <p>Testing Main.js</p>
