@@ -1,4 +1,4 @@
-import Stock from './Stock';
+import Stock from '../Stock';
 
 describe("Testing Stock Object functionality", function () {
     let amzn = new Stock('AMZN', 100);

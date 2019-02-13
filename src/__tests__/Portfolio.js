@@ -1,5 +1,5 @@
-import Portfolio from './Portfolio';
-import Stock from './Stock';
+import Portfolio from '../Portfolio';
+import Stock from '../Stock';
 
 describe('Testing Portfolio Object functionality', function () {
     let portfolio1 = new Portfolio();
