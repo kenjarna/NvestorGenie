@@ -10,21 +10,21 @@ export default class Stock{
         this.ticker = symbol;
         this.numShares = shares;
         this.companyName = '';
-        this.latestTime = 0;
-        this.primaryExchange = 0;
-        this.latestPrice = 0;
-        this.PERatio = 0;
-        this.week52High = 0;
-        this.week52Low = 0;
-        this.ytdChange = 0;
-        this.closePrice = 0;
-        this.openPrice = 0;
-        this.beta = 0;
-        this.dividendRate = 0;
-        this.dividendYield = 0;
-        this.latestEPS = 0;
-        this.latestEPSDate = 0;
-        this.investmentAmount = 0;  
+        this.latestTime = null;
+        this.primaryExchange = null;
+        this.latestPrice = null;
+        this.PERatio = null;
+        this.week52High = null;
+        this.week52Low = null;
+        this.ytdChange = null;
+        this.closePrice = null;
+        this.openPrice = null;
+        this.beta = null;
+        this.dividendRate = null;
+        this.dividendYield = null;
+        this.latestEPS = null;
+        this.latestEPSDate = null;
+        this.investmentAmount = null;  
     }
 
     //Look into observer methods to automatically update the portfolio's values when Stock object changes
