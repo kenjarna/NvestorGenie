@@ -1,0 +1,12 @@
+.stockFetcher {
+    flex-grow: 1;
+    padding: 0 3rem;
+    border-left: 1px solid #eee;
+    position: relative;
+    text-align: center;
+}
+
+.stockForm {
+    flex-grow: 1;
+    padding: 0 3rem;
+  }

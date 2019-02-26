@@ -1,0 +1,32 @@
+.stockList {
+  border-left: 1px solid #eee;
+  border-right: 10px solid #eee;
+  width: 50rem;
+  position: relative;
+  text-align: center;
+}
+
+.actionBar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-top: 1px solid #eee;
+  width: 100%;
+}
+
+.actionBar button {
+  background-color: transparent;
+  border: 0;
+  color: #008BF8;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+#printReport {
+  position:absolute;
+  right:0;
+}
+
+#runReport {
+  align-content: center;
+}
