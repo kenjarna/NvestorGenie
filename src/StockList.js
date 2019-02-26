@@ -1,11 +1,11 @@
 import React from 'react';
 import StockItem from './StockListItem';
-
+import './StockList.css';
 const StockList = (props) => {
     const stockTickers = Object.keys(props.stocks.stockList);
 
     return (
-        <div className="stock-list">
+        <div className="stockList">
             <h3>Stock List </h3>
             <ul id="stocks">
                 {stockTickers.map(ticker => (
@@ -19,6 +19,19 @@ const StockList = (props) => {
                 ))}
 
             </ul>
+            <div className="actionBar">
+                <button 
+                    id="printReport" 
+                    onClick={console.log("print report")}
+                    title="Run Report"> Print Report
+                </button>
+                <button 
+                    id="runReport" 
+                    onClick={console.log("submitted report for analysis")}
+                    title="Run Report"> Analyze
+                </button>
+            </div>
+
         </div>
     )
 }

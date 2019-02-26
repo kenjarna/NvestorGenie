@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Portfolio from './Portfolio.js';
+import './StockFetcher.css';
 
 
 class StockFetcher extends Component {
@@ -37,11 +38,11 @@ class StockFetcher extends Component {
     render() {
         
         return (
-            <div>
+            <div className="stockFetcher">
                 <p>Please enter a stock's ticker symbol and the amount of shares you plan to purchase below!</p>
-                <form className="stock-form" onSubmit={this.handleFormSubmit.bind(this)}>
-                    <input className="stock-form" id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
-                    <input className="stock-form" id ="num-shares" placeholder="Enter number of shares . . ." required/>
+                <form className="stockForm" onSubmit={this.handleFormSubmit.bind(this)}>
+                    <input id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
+                    <input id ="num-shares" placeholder="Enter number of shares . . ." required/>
                     <input type="submit"/>
                 </form>
             </div>
