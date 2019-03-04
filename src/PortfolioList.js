@@ -1,18 +1,19 @@
 import React from 'react';
-import StockItem from './StockListItem';
-import './StockList.css';
-const StockList = (props) => {
-    const stockTickers = Object.keys(props.stocks.stockList);
+import PortfolioItem from './PortfolioListItem';
+import './PortfolioList.css';
+
+const PortfolioList = ({portfolios}) => {
+    const portfolioIds = Object.keys(portfolios);
 
     return (
-        <div className="stockList">
-            <h3>Stock List </h3>
-            <ul id="stocks">
-                {stockTickers.map(ticker => (
-                    <StockItem
-                        key={ticker}
-                        stock={props.stocks.stockList[ticker]}
-                        removeStock={props.removeStock}
+        <div className="portfolioList">
+            <h3>Portfolio List </h3>
+            <ul id="portfolios">
+                {portfolioIds.map(portfolioId => (
+                    <PortfolioItem
+                        key={portfolioId}
+                        portfolio={portfolios[portfolioId]}
+                        removeStock={portfolios.removeStock}
                         
                     />
 
@@ -36,4 +37,4 @@ const StockList = (props) => {
     )
 }
 
-export default StockList;
+export default PortfolioList;
