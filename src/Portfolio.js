@@ -1,9 +1,12 @@
 import Stock from './Stock.js';
 
 export default class Portfolio {
-    constructor(){
+    constructor(title = '', comments = ''){
         this.stockList = {};
         this.totalValue = 0;
+        this.title = title;
+        this.lastModified = null;
+        this.comments = comments;
     }
     addStock(ticker, numshares) {
         let stock = new Stock(ticker, numshares);
@@ -15,6 +18,14 @@ export default class Portfolio {
         for (let i = 0; i < keys.length; i = i + 1) {
             console.log(this.stockList[keys[i]]);
         }
+    }
+    setName(name) {
+        this.title = name;
+        this.lastModified = Date(Date.now());
+    }
+    setComments(comment) {
+        this.comments = comment;
+        this.lastModified = Date(Date.now());
     }
     resetPortfolio() {
         this.stockList = {};
