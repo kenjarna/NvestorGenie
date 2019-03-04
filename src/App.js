@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import Main from './Main'
-import Portfolio from './Portfolio';
 
 class App extends Component {
     constructor() {
         super()
     
         this.state = {
-            portfolio: new Portfolio()  
+            portfolio: {},
         }
 
         this.updatePortfolio = this.updatePortfolio.bind(this);
