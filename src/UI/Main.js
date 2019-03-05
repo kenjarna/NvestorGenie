@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Main.css';
+import '../StyleSheets/Main.css';
 
 import StockFetcher from './StockFetcher';
 import ReportHandler from './ReportHandler';

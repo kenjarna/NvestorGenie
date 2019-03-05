@@ -1,6 +1,6 @@
 import React from 'react';
 import PortfolioItem from './PortfolioListItem';
-import './PortfolioList.css';
+import '../StyleSheets/PortfolioList.css';
 
 const PortfolioList = ({portfolios}) => {
     const portfolioIds = Object.keys(portfolios);

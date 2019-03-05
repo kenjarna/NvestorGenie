@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
 
-import Portfolio from './Portfolio.js';
-import './StockFetcher.css';
+import Portfolio from '../LogicComponents/Portfolio.js';
+import '../StyleSheets/StockFetcher.css';
 
 
 class StockFetcher extends Component {
