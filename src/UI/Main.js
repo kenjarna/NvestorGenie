@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../StyleSheets/Main.css';
 
-import StockFetcher from './StockFetcher';
+import PortfolioManager from './PortfolioManager';
 import ReportHandler from './ReportHandler';
 import Analysis from './StockAnalysis';
 import PortfolioList from './PortfolioList';
@@ -12,12 +12,12 @@ const Main = (props) => {
         <div className="Main">
             <Sidebar />
             <PortfolioList
-                portfolios={props.portfolio}
+                portfolios={props.portfolios}
                 removeStock={props.removeStock}
             />
-            <StockFetcher
-                updatePortfolio={props.updatePortfolio}
-                portfolio={props.portfolio}
+            <PortfolioManager
+                savePortfolio={props.savePortfolio}
+                portfolios={props.portfolios}
             />
 
         </div>

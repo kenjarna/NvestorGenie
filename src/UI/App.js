@@ -7,25 +7,27 @@ class App extends Component {
         super()
     
         this.state = {
-            portfolio: {},
+            portfolios: {},
         }
-
-        this.updatePortfolio = this.updatePortfolio.bind(this);
     }
 
     //Action handed to StockFetcher component to set app's state to the filtered stock information
-    updatePortfolio = (data) =>  {
-        this.setState({ portfolio: data });  
+    savePortfolio = (data) => {
+        const portfolios = { ...this.state.portfolios }
+        portfolios[data.title] = data;
+        this.setState({ portfolios });  
     }
 
     removeStock = (ticker) => {
         const stocks = { ...this.state.portfolio };
         delete stocks[ticker];
     }
+
+    componentWillUpdate
         
     render() {
     const actions = {
-        updatePortfolio: this.updatePortfolio,
+        savePortfolio: this.savePortfolio,
         removeStock: this.removeStock
     }
     return (
@@ -33,7 +35,7 @@ class App extends Component {
         <div className="App">
         <Main 
             {...actions}
-            {...this.state}
+            portfolios = {this.state.portfolios}
         />
         </div>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const PortfolioItem = (props) => {
+const PortfolioItem = ({ portfolio }) => {
     return (
         <li>
-            <div className="stock-item">
-                <div className="stock-ticker">
-                    {props.portfolio}
+            <div className="portfolio-item">
+                <div className="portfolio-ticker">
+                    {portfolio.title}
                 </div>
             </div>
         </li>
