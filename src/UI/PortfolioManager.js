@@ -74,7 +74,7 @@ class PortfolioManager extends Component {
                     <input type="submit"/>
                 </form>
 
-                <button className="analyze" onClick={this.state.portfolio.updatePortfolio()}> Anlyze Stock List</button>
+                <button className="analyze" onClick={this.state.portfolio.updatePortfolio()}> Analyze Stock List</button>
                 <button className="newPortfolio" onClick={this.newPortfolio}>Add New Portfolio</button>
             </div>
         )

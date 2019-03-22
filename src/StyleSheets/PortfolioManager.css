@@ -3,13 +3,14 @@
     padding: 0 3rem;
 }
 
-.portfolioManager button {
+button #rte {
     border: none;
     background: none;
     cursor: pointer;
     outline: none;
     padding: 0;
 }
+
 
 .stockForm {
     flex-grow: 1;
@@ -43,7 +44,7 @@ input[name="title"] {
     position: absolute;
     top: 2.2rem;
     white-space: nowrap;
-    overflow: hidden;
+    
 }
 
 .RichTextEditor__root___2QXK- .public-DraftEditor-content {
