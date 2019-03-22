@@ -1,5 +1,5 @@
-import Portfolio from '../Portfolio';
-import Stock from '../Stock';
+import Portfolio from '../LogicComponents/Portfolio';
+import Stock from '../LogicComponents/Stock';
 
 describe('Testing Portfolio Object functionality', function () {
     let portfolio1 = new Portfolio();
@@ -11,7 +11,8 @@ describe('Testing Portfolio Object functionality', function () {
             expect(portfolio1.totalValue).toEqual(0);
             expect(portfolio2.stockList).toEqual({});
             expect(portfolio2.totalValue).toEqual(0);
-            expect(portfolio1).toEqual(portfolio2);
+            expect(portfolio1.id).toEqual(0);
+            expect(portfolio2.id).toEqual(1);
         });
 
     });
@@ -35,12 +36,17 @@ describe('Testing Portfolio Object functionality', function () {
             portfolio1.resetPortfolio();
             expect(portfolio1.stockList).toEqual({});
             expect(portfolio1.totalValue).toEqual(0);
-            expect(portfolio1).toEqual(portfolio2);
+            expect(portfolio1.id).toEqual(4);
+            expect(portfolio1.title).toEqual("");
+            expect(portfolio1.comments).toEqual("");
+
         });
 
         it('Test updatePortfolio method of Portfolio object on empty stock list', () => {
             portfolio1.updatePortfolio();
-            expect(portfolio1).toEqual(portfolio2);
+            expect(portfolio1.stockList).toEqual({});
+            expect(portfolio1.totalValue).toEqual(0);
+            expect(portfolio1.id).toEqual(6);
         });
         it('Test updatePortfolio method of Portfolio object on non-empty stock list', () => {
             portfolio1.addStock('AMZN', 100);
