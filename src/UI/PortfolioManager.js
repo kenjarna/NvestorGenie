@@ -22,7 +22,6 @@ class PortfolioManager extends Component {
         let shares = document.getElementById('num-shares').value;      
         this.state.portfolio.addStock(ticker, shares);
         this.props.savePortfolio(this.state.portfolio); 
-        
         ev.target.reset();
     }
 
@@ -40,27 +39,44 @@ class PortfolioManager extends Component {
         this.setState({portfolio, editorValue}, ()=>this.props.savePortfolio(portfolio)); 
     }
 
+    newPortfolio = () => {
+        this.setState(
+            {   
+                portfolio: new Portfolio(),
+                editorValue: RichTextEditor.createEmptyValue()
+            }
+        );
+    }
+
     render() {
         
         return (
             <div className="portfolioManager">
                 <p>Please enter a stock's ticker symbol and the amount of shares you plan to purchase below!</p>
+                <form className="portfolio-attributes">
+                    <div className="form-actions">
+                        <p>
+                            <input
+                                type="text" name="title"
+                                placeholder="Title your Portfolio" value={this.state.portfolio.title}
+                                onChange={this.handleTitleChanges} required
+                            />
+                        </p>
+                        <RichTextEditor
+                            id="rte" name="comments" value={this.state.editorValue}
+                            onChange={this.handleEditorChanges}>
+                        </RichTextEditor>
+                    </div>
+                </form>
+                
                 <form className="stockForm" onSubmit={this.handleStockSubmit.bind(this)}>
-                    <input
-                        type="text" name="title"
-                        placeholder="Title your Portfolio" value={this.state.portfolio.title}
-                        onChange={this.handleTitleChanges} required
-                    />
                     <input id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
                     <input id="num-shares" placeholder="Enter number of shares . . ." required />
-                    <RichTextEditor
-                        name="comments" value={this.state.editorValue}
-                        onChange={this.handleEditorChanges}>
-                    </RichTextEditor>
                     <input type="submit"/>
                 </form>
 
                 <button className="analyze" onClick={this.state.portfolio.updatePortfolio()}> Anlyze Stock List</button>
+                <button className="newPortfolio" onClick={this.newPortfolio}>Add New Portfolio</button>
             </div>
         )
     }

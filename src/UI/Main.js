@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../StyleSheets/Main.css';
 
 import PortfolioManager from './PortfolioManager';
-import ReportHandler from './ReportHandler';
-import Analysis from './StockAnalysis';
 import PortfolioList from './PortfolioList';
 import Sidebar from './Sidebar';
 

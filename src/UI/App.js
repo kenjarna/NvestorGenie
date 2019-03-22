@@ -14,7 +14,9 @@ class App extends Component {
     //Action handed to StockFetcher component to set app's state to the filtered stock information
     savePortfolio = (data) => {
         const portfolios = { ...this.state.portfolios }
-        portfolios[data.title] = data;
+        if(!Object.keys(portfolios).includes(data.id)){
+            portfolios[data.id] = data;
+        }
         this.setState({ portfolios });  
     }
 
