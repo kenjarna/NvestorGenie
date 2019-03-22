@@ -52,7 +52,6 @@ class PortfolioManager extends Component {
         
         return (
             <div className="portfolioManager">
-                <p>Please enter a stock's ticker symbol and the amount of shares you plan to purchase below!</p>
                 <form className="portfolio-attributes">
                     <div className="form-actions">
                         <p>

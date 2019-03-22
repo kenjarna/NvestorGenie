@@ -3,8 +3,8 @@ import React from 'react';
 const PortfolioItem = ({ portfolio }) => {
     return (
         <li>
-            <div className="portfolio-item">
-                <div className="portfolio-name">
+            <div className="portfolio">
+                <div className="portfolio-title">
                     {portfolio.title}
                 </div>
                 <div className="portfolio-comments"
