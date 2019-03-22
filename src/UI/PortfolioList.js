@@ -3,9 +3,7 @@ import PortfolioItem from './PortfolioListItem';
 import '../StyleSheets/PortfolioList.css';
 
 const PortfolioList = ({ portfolios }) => {
-    console.log("From app",portfolios);
     const portfolioIds = Object.keys(portfolios);
-    console.log("Ids from app",portfolioIds);
 
     return (
         <div className="portfolioList">

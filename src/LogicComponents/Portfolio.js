@@ -7,6 +7,9 @@ export default class Portfolio {
         this.title = title;
         this.lastModified = null;
         this.comments = comments;
+        this.id = id;
+
+        id++;
     }
     addStock(ticker, numshares) {
         let stock = new Stock(ticker, numshares);
@@ -30,5 +33,10 @@ export default class Portfolio {
     resetPortfolio() {
         this.stockList = {};
         this.totalValue = 0;
+        this.lastModified = Date(Date.now());
+        this.comments = "";
+        this.title = "";
     }
 }
+
+var id = 0;
