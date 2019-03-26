@@ -99,15 +99,15 @@ class PortfolioManager extends Component {
                 <button className="analyze" onClick={this.state.portfolio.updatePortfolio()}> Analyze Stock List</button>
 
                 <button className="newPortfolio" onClick={this.newPortfolio} title="Add Portfolio">
-                    <i class="fa fa-plus-circle"></i>
+                    <i className="fa fa-plus-circle"></i>
                 </button>
                 
                 <button className="editPortfolio" onClick={this.editPortfolio} title="Edit Portfolio">
-                    <i class="fa fa-edit"></i>
+                    <i className="fa fa-edit"></i>
                 </button>
 
                 <button className="viewPortfolio" onClick={this.viewPortfolio} title="Save Portfolio">
-                    <i class="fa fa-save"></i>
+                    <i className="fa fa-save"></i>
                 </button>
             </div>
         )
