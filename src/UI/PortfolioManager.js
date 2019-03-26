@@ -13,6 +13,8 @@ class PortfolioManager extends Component {
             portfolio: new Portfolio(),
             totalInvestment: 0,
             editorValue: RichTextEditor.createEmptyValue(),
+            editViewHidden: true,
+            viewStocksHidden: true,
         };
     }
 
@@ -43,9 +45,29 @@ class PortfolioManager extends Component {
         this.setState(
             {   
                 portfolio: new Portfolio(),
-                editorValue: RichTextEditor.createEmptyValue()
+                editorValue: RichTextEditor.createEmptyValue(),
+                editViewHidden: false,
+                viewStocksHidden: true,
             }
         );
+    }
+
+    editPortfolio = () => {
+        this.setState(
+            {
+                editViewHidden: false,
+                viewStocksHidden: true,
+            }
+        )
+    }
+
+    viewPortfolio = () => {
+        this.setState(
+            {
+                editViewHidden: true,
+                viewStocksHidden: false,
+            }
+        )
     }
 
     render() {
@@ -53,7 +75,7 @@ class PortfolioManager extends Component {
         return (
             <div className="portfolioManager">
                 <form className="portfolio-attributes">
-                    <div className="form-actions">
+                    <div className={this.state.editViewHidden ? "hidden" : "form-actions"}>
                         <p>
                             <input
                                 type="text" name="title"
@@ -68,14 +90,25 @@ class PortfolioManager extends Component {
                     </div>
                 </form>
                 
-                <form className="stockForm" onSubmit={this.handleStockSubmit.bind(this)}>
+                <form className={this.state.viewStocksHidden ? "hidden" : "stockForm"} onSubmit={this.handleStockSubmit.bind(this)}>
                     <input id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
                     <input id="num-shares" placeholder="Enter number of shares . . ." required />
                     <input type="submit"/>
                 </form>
 
                 <button className="analyze" onClick={this.state.portfolio.updatePortfolio()}> Analyze Stock List</button>
-                <button className="newPortfolio" onClick={this.newPortfolio}>Add New Portfolio</button>
+
+                <button className="newPortfolio" onClick={this.newPortfolio} title="Add Portfolio">
+                    <i class="fa fa-plus-circle"></i>
+                </button>
+                
+                <button className="editPortfolio" onClick={this.editPortfolio} title="Edit Portfolio">
+                    <i class="fa fa-edit"></i>
+                </button>
+
+                <button className="viewPortfolio" onClick={this.viewPortfolio} title="Save Portfolio">
+                    <i class="fa fa-save"></i>
+                </button>
             </div>
         )
     }

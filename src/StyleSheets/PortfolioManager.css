@@ -78,3 +78,7 @@ input[name="title"] {
     line-height: 23px;
     border: 0
 }
+
+.hidden {
+    display: none;
+}

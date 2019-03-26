@@ -13,7 +13,6 @@ const PortfolioList = ({ portfolios }) => {
                     <PortfolioItem
                         key={portfolioId}
                         portfolio={portfolios[portfolioId]}
-                        removeStock={portfolios.removeStock}
                     />
                 ))}
             </ul>
