@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
 
 import Portfolio from '../LogicComponents/Portfolio.js';
+import StockList from './StockList';
 import '../StyleSheets/PortfolioManager.css';
 
 
@@ -13,7 +14,7 @@ class PortfolioManager extends Component {
             portfolio: new Portfolio(),
             totalInvestment: 0,
             editorValue: RichTextEditor.createEmptyValue(),
-            editViewHidden: true,
+            editViewHidden: false,
             viewStocksHidden: true,
         };
     }
@@ -21,7 +22,7 @@ class PortfolioManager extends Component {
     handleStockSubmit(ev) {
         ev.preventDefault();
         let ticker = document.getElementById('stock-ticker').value.toUpperCase();
-        let shares = document.getElementById('num-shares').value;      
+        let shares = document.getElementById('num-shares').value; 
         this.state.portfolio.addStock(ticker, shares);
         this.props.savePortfolio(this.state.portfolio); 
         ev.target.reset();
@@ -74,6 +75,18 @@ class PortfolioManager extends Component {
         
         return (
             <div className="portfolioManager">
+                <button className="newPortfolio" onClick={this.newPortfolio} title="Add Portfolio">
+                    <i className="fa fa-plus-circle"></i>
+                </button>
+
+                <button className="editPortfolio" onClick={this.editPortfolio} title="Edit Portfolio">
+                    <i className="fa fa-edit"></i>
+                </button>
+
+                <button className="viewPortfolio" onClick={this.viewPortfolio} title="Save Portfolio">
+                    <i className="fa fa-save"></i>
+                </button>
+
                 <form className="portfolio-attributes">
                     <div className={this.state.editViewHidden ? "hidden" : "form-actions"}>
                         <p>
@@ -91,23 +104,17 @@ class PortfolioManager extends Component {
                 </form>
                 
                 <form className={this.state.viewStocksHidden ? "hidden" : "stockForm"} onSubmit={this.handleStockSubmit.bind(this)}>
-                    <input id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
-                    <input id="num-shares" placeholder="Enter number of shares . . ." required />
+                    <input type="text" id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
+                    <input type="number"id="num-shares" placeholder="Enter number of shares . . ." required />
                     <input type="submit"/>
                 </form>
-
-                <button className="analyze" onClick={this.state.portfolio.updatePortfolio()}> Analyze Stock List</button>
-
-                <button className="newPortfolio" onClick={this.newPortfolio} title="Add Portfolio">
-                    <i className="fa fa-plus-circle"></i>
-                </button>
-                
-                <button className="editPortfolio" onClick={this.editPortfolio} title="Edit Portfolio">
-                    <i className="fa fa-edit"></i>
-                </button>
-
-                <button className="viewPortfolio" onClick={this.viewPortfolio} title="Save Portfolio">
-                    <i className="fa fa-save"></i>
+                <div className={this.state.viewStocksHidden ? "hidden" : "portfolioStockList"}>
+                    <StockList
+                        stockList={this.state.portfolio.stockList}
+                    />
+                </div>
+                <button className={this.state.viewStocksHidden ? "hidden" : "analyze"}
+                    onClick={this.state.portfolio.updatePortfolio()}> Analyze Stock List
                 </button>
             </div>
         )

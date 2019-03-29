@@ -11,7 +11,6 @@ const Main = (props) => {
             <Sidebar />
             <PortfolioList
                 portfolios={props.portfolios}
-                removeStock={props.removeStock}
             />
             <PortfolioManager
                 savePortfolio={props.savePortfolio}
