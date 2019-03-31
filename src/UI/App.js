@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../StyleSheets/App.css';
 import Main from './Main'
+import Portfolio from '../LogicComponents/Portfolio';
 
 class App extends Component {
     constructor() {
@@ -8,6 +9,7 @@ class App extends Component {
     
         this.state = {
             portfolios: {},
+            currentPortfolio: new Portfolio(),
         }
     }
 
@@ -25,12 +27,15 @@ class App extends Component {
         delete stocks[ticker];
     }
 
-    componentWillUpdate
+    setCurrentPortfolio = (portfolio) => {
+        this.setState({currentPortfolio: portfolio});
+    }
         
     render() {
     const actions = {
         savePortfolio: this.savePortfolio,
-        removeStock: this.removeStock
+        removeStock: this.removeStock,
+        setCurrentPortfolio: this.setCurrentPortfolio,
     }
     return (
       
@@ -38,6 +43,7 @@ class App extends Component {
         <Main 
             {...actions}
             portfolios = {this.state.portfolios}
+            currentPortfolio = {this.state.currentPortfolio}
         />
         </div>
     );

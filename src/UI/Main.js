@@ -11,10 +11,13 @@ const Main = (props) => {
             <Sidebar />
             <PortfolioList
                 portfolios={props.portfolios}
+                setCurrentPortfolio={props.setCurrentPortfolio}
             />
             <PortfolioManager
                 savePortfolio={props.savePortfolio}
                 portfolios={props.portfolios}
+                setCurrentPortfolio={props.setCurrentPortfolio}
+                currentPortfolio={props.currentPortfolio}
             />
 
         </div>

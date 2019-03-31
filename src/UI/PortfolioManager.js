@@ -19,6 +19,17 @@ class PortfolioManager extends Component {
         };
     }
 
+    componentDidUpdate(prevProps){
+        if (this.props.currentPortfolio !== prevProps.currentPortfolio){
+            this.setState(
+                {
+                    portfolio: this.props.currentPortfolio,
+                    totalInvestment: this.props.currentPortfolio.totalInvestment,
+                    editorValue: RichTextEditor.createValueFromString(this.props.currentPortfolio.comments,'html')
+                });
+        }
+    }
+
     handleStockSubmit(ev) {
         ev.preventDefault();
         let ticker = document.getElementById('stock-ticker').value.toUpperCase();

@@ -1,18 +1,24 @@
 import React from 'react';
 
-const PortfolioItem = ({ portfolio }) => {
+const PortfolioItem = ({ portfolio,setCurrentPortfolio }) => {
+    const handleClick = () => {
+        setCurrentPortfolio(portfolio);
+
+    }
     return (
-        <li>
-            <div className="portfolio">
-                <div className="portfolio-title">
-                    {portfolio.title}
+        <a onClick = {handleClick}>
+            <li>
+                <div className="portfolio">
+                    <div className="portfolio-title">
+                        {portfolio.title}
+                    </div>
+                    <div className="portfolio-comments"
+                        dangerouslySetInnerHTML={{__html: portfolio.comments}}
+                    >
+                    </div>
                 </div>
-                <div className="portfolio-comments"
-                    dangerouslySetInnerHTML={{__html: portfolio.comments}}
-                >
-                </div>
-            </div>
-        </li>
+            </li>
+        </a>
     )
 }
 

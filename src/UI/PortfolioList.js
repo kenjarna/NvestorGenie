@@ -2,9 +2,8 @@ import React from 'react';
 import PortfolioItem from './PortfolioListItem';
 import '../StyleSheets/PortfolioList.css';
 
-const PortfolioList = ({ portfolios }) => {
+const PortfolioList = ({ portfolios, setCurrentPortfolio }) => {
     const portfolioIds = Object.keys(portfolios);
-
     return (
         <div className="portfolioList">
             <h3>Portfolio List </h3>
@@ -13,6 +12,7 @@ const PortfolioList = ({ portfolios }) => {
                     <PortfolioItem
                         key={portfolioId}
                         portfolio={portfolios[portfolioId]}
+                        setCurrentPortfolio={setCurrentPortfolio}
                     />
                 ))}
             </ul>
