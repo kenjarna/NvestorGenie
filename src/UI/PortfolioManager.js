@@ -18,7 +18,6 @@ class PortfolioManager extends Component {
     }
 
     componentDidUpdate(prevProps){
-        console.log(prevProps, this.state.portfolio);
         if (this.props.currentPortfolio.stockList !== prevProps.currentPortfolio.stockList){
             this.setState(
                 {

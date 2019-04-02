@@ -12,6 +12,7 @@ const Main = (props) => {
             <PortfolioList
                 portfolios={props.portfolios}
                 setCurrentPortfolio={props.setCurrentPortfolio}
+                savePortfolio={props.savePortfolio}
             />
             <PortfolioManager
                 savePortfolio={props.savePortfolio}

@@ -2,7 +2,7 @@ import React from 'react';
 import PortfolioItem from './PortfolioListItem';
 import '../StyleSheets/PortfolioList.css';
 
-const PortfolioList = ({ portfolios, setCurrentPortfolio }) => {
+const PortfolioList = ({ portfolios, setCurrentPortfolio, savePortfolio }) => {
     const portfolioIds = Object.keys(portfolios);
     return (
         <div className="portfolioList">
@@ -24,8 +24,15 @@ const PortfolioList = ({ portfolios, setCurrentPortfolio }) => {
                 </button>
                 <button 
                     id="runReport" 
-                    onClick={console.log("submitted report for analysis")}
-                    title="Run Report"> Analyze
+                    onClick={
+                        async function () {
+                            for (let i in portfolios){
+                                await portfolios[i].updatePortfolio();
+                                savePortfolio(portfolios[i]);
+                            }
+                        }
+                    }
+                    title="Run Report"> Analyze All Portfolios
                 </button>
             </div>
 
