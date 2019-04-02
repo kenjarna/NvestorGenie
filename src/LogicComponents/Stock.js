@@ -27,19 +27,20 @@ export default class Stock{
         this.investmentAmount = null;  
     }
 
-    //Look into observer methods to automatically update the portfolio's values when Stock object changes
-    //Can fake the axios request to test the async
     async fetchStockInfo() {
         //Need to handle when the ticker symbol is not found. 
         // Not sure what payload is delivered in this case.
-        try {
-            let quote = await (axios.get(this.buildLink('quote', this.ticker)));
-            let stats = await (axios.get(this.buildLink('stats', this.ticker)));
-            this.setBasicStats(quote);
-            this.setStockInfo(stats);
-
-        } catch (err) { console.log(err);}
-            
+        await axios.get(this.buildLink('quote', this.ticker))
+            .then(response => {
+                const quote = response.data.quote;
+                this.setBasicStats(quote);
+            });
+        await axios.get(this.buildLink('stats', this.ticker))
+            .then(response => {
+                const stats = response.data;
+                this.setStockInfo(stats);
+            });
+     
     }
     buildLink(type,ticker) {
         if (type === 'quote') {
@@ -49,7 +50,6 @@ export default class Stock{
             return baseAPILink + ticker + stockStatsLink;
         }
     }
-    //Setup a spy to determine if this method was called (by the fetchStockInfo fcn)
     setBasicStats(quote) {
         this.companyName = quote.companyName;
         this.latestTime = quote.latestTime;

@@ -5,7 +5,7 @@ export default class Portfolio {
         this.stockList = {};
         this.totalValue = 0;
         this.title = title;
-        this.lastModified = null;
+        this.lastModified = Date(Date.now());
         this.comments = comments;
         this.id = id;
 
@@ -16,11 +16,14 @@ export default class Portfolio {
         this.stockList[ticker] = stock;  
     }
     //This function should update the stock information of all stocks in the portfolio
-    updatePortfolio() {
+    async updatePortfolio() {
         let keys = Object.keys(this.stockList);
-        for (let i = 0; i < keys.length; i = i + 1) {
-            console.log(this.stockList[keys[i]]);
-        }
+        this.lastModified = Date(Date.now());
+        this.totalValue = 0;
+        for (let stock of keys) {
+            await this.stockList[stock].fetchStockInfo();
+            this.totalValue += this.stockList[stock].investmentAmount;
+        }   
     }
     setName(name) {
         this.title = name;
