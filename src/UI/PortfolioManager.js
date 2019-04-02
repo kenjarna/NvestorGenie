@@ -5,14 +5,12 @@ import Portfolio from '../LogicComponents/Portfolio.js';
 import StockList from './StockList';
 import '../StyleSheets/PortfolioManager.css';
 
-
 class PortfolioManager extends Component {
-    
     constructor(props) {
+        
         super(props);
         this.state = {
             portfolio: new Portfolio(),
-            totalInvestment: 0,
             editorValue: RichTextEditor.createEmptyValue(),
             editViewHidden: false,
             viewStocksHidden: true,
@@ -20,7 +18,8 @@ class PortfolioManager extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if (this.props.currentPortfolio !== prevProps.currentPortfolio){
+        console.log(prevProps, this.state.portfolio);
+        if (this.props.currentPortfolio.stockList !== prevProps.currentPortfolio.stockList){
             this.setState(
                 {
                     portfolio: this.props.currentPortfolio,
@@ -53,17 +52,6 @@ class PortfolioManager extends Component {
         this.setState({portfolio, editorValue}, ()=>this.props.savePortfolio(portfolio)); 
     }
 
-    newPortfolio = () => {
-        this.setState(
-            {   
-                portfolio: new Portfolio(),
-                editorValue: RichTextEditor.createEmptyValue(),
-                editViewHidden: false,
-                viewStocksHidden: true,
-            }
-        );
-    }
-
     editPortfolio = () => {
         this.setState(
             {
@@ -82,11 +70,18 @@ class PortfolioManager extends Component {
         )
     }
 
+    async fetchStocks (rawPortfolio) {
+        await rawPortfolio.updatePortfolio();
+
+        this.props.setCurrentPortfolio(rawPortfolio);
+        
+    }
+
     render() {
         
         return (
             <div className="portfolioManager">
-                <button className="newPortfolio" onClick={this.newPortfolio} title="Add Portfolio">
+                <button className="newPortfolio" onClick={() => {this.props.setCurrentPortfolio(new Portfolio()); this.editPortfolio();}} title="Add Portfolio">
                     <i className="fa fa-plus-circle"></i>
                 </button>
 
@@ -94,8 +89,8 @@ class PortfolioManager extends Component {
                     <i className="fa fa-edit"></i>
                 </button>
 
-                <button className="viewPortfolio" onClick={this.viewPortfolio} title="Save Portfolio">
-                    <i className="fa fa-save"></i>
+                <button className="viewPortfolio" onClick={this.viewPortfolio} title="Add Stocks">
+                    <i className="fa fa-list"></i>
                 </button>
 
                 <form className="portfolio-attributes">
@@ -109,7 +104,7 @@ class PortfolioManager extends Component {
                         </p>
                         <RichTextEditor
                             id="rte" name="comments" value={this.state.editorValue}
-                            onChange={this.handleEditorChanges}>
+                            onChange={this.handleEditorChanges} placeholder="Add a note about your portfolio . . .">
                         </RichTextEditor>
                     </div>
                 </form>
@@ -117,15 +112,17 @@ class PortfolioManager extends Component {
                 <form className={this.state.viewStocksHidden ? "hidden" : "stockForm"} onSubmit={this.handleStockSubmit.bind(this)}>
                     <input type="text" id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
                     <input type="number"id="num-shares" placeholder="Enter number of shares . . ." required />
-                    <input type="submit"/>
+                    <input type="submit" value="Add Stock to List"/>
                 </form>
+                
                 <div className={this.state.viewStocksHidden ? "hidden" : "portfolioStockList"}>
                     <StockList
                         stockList={this.state.portfolio.stockList}
                     />
                 </div>
+                
                 <button className={this.state.viewStocksHidden ? "hidden" : "analyze"}
-                    onClick={this.state.portfolio.updatePortfolio()}> Analyze Stock List
+                    onClick={() => {this.fetchStocks(this.state.portfolio)}}> Analyze Stock List
                 </button>
             </div>
         )
