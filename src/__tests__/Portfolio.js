@@ -4,7 +4,7 @@ import Stock from '../LogicComponents/Stock';
 describe('Testing Portfolio Object functionality', function () {
     let portfolio1;
     let portfolio2;
-    let GOOGL = new Stock('GOOGL', 100, 0.8);
+    const GOOGL = new Stock('GOOGL', 100, 0.8);
 
     beforeEach(() => {
         portfolio1 = new Portfolio();
@@ -82,6 +82,67 @@ describe('Testing Portfolio Object functionality', function () {
             amznValue = portfolio1.stockList['AMZN'].investmentAmount;
             expect(portfolio1.totalValue).toEqual(googlValue + amznValue);
             
+        });
+        it("Test analyzePortfolio method on a non-empty stock list",()=>{
+            portfolio1.addStock('AMZN',100, 0.8);
+            portfolio1.addStock('GOOGL',100, 0.75);
+            const googl = portfolio1.stockList['GOOGL'];
+            const amzn = portfolio1.stockList['AMZN'];
+
+            //Manually set the stats of AMZN and GOOGL
+            const AMZNQuote = {
+                'companyName': 'Amazon',
+                'latestTime': '2/10/2019',
+                'primaryExchange': 'NASDAQ',
+                'latestPrice': 1760,
+                'PERatio': 45.7,
+                'week52High': 1905,
+                'week52Low': 1203,
+                'ytdChange': 23,
+                'close': 1548,
+                'open': 1500
+            };
+            const AMZNStats = {
+                'beta': 54,
+                'dividendRate': 14.065,
+                'dividendYield': 15.322,
+                'latestEPS': 1.86,
+                'latestEPSDate': '2/10/19'
+            };
+            const GOOGLQuote = {
+                'companyName': 'Alphabet Inc',
+                'latestTime': '4/3/2019',
+                'primaryExchange': 'NASDAQ',
+                'latestPrice': 300,
+                'PERatio': 22,
+                'week52High': 325,
+                'week52Low': 150,
+                'ytdChange': 5,
+                'close': 300,
+                'open': 275
+            };
+            const GOOGLStats = {
+                'beta': 10,
+                'dividendRate': 14.065,
+                'dividendYield': 15.322,
+                'latestEPS': 1.86,
+                'latestEPSDate': '2/10/19'
+            };
+            amzn.setStockInfo(AMZNStats);
+            amzn.setBasicStats(AMZNQuote);
+            googl.setStockInfo(GOOGLStats);
+            googl.setBasicStats(GOOGLQuote);
+            const calculatedTotalValue = googl.investmentAmount + amzn.investmentAmount
+            googl.analyzeStock(calculatedTotalValue);
+            amzn.analyzeStock(calculatedTotalValue);
+
+            expect(calculatedTotalValue).toEqual(206000);
+            expect(amzn.portionOfPortfolio).toEqual(amzn.investmentAmount / calculatedTotalValue);
+            expect(googl.portionOfPortfolio).toEqual(googl.investmentAmount / calculatedTotalValue);
+            expect(amzn.weightedBeta).toBeCloseTo(46.1359, 4);
+            expect(amzn.expectedReturn).toBeCloseTo(.54679612, 8);
+            expect(googl.weightedBeta).toBeCloseTo(1.45631, 5);
+            expect(googl.expectedReturn).toBeCloseTo(0.08737864,8);
         });
     });
 

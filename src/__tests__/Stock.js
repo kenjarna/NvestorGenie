@@ -23,6 +23,8 @@ describe("Testing Stock Object functionality", function () {
             expect(amzn.latestEPSDate).toEqual(null);
             expect(amzn.investmentAmount).toEqual(null);
             expect(amzn.latestPrice).toEqual(null);
+            expect(amzn.weightedBeta).toEqual(null);
+            expect(amzn.portionOfPortfolio).toEqual(null);
             expect(amzn.expectedReturn).toEqual(0);
         });
 
