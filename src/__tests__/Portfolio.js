@@ -4,7 +4,7 @@ import Stock from '../LogicComponents/Stock';
 describe('Testing Portfolio Object functionality', function () {
     let portfolio1;
     let portfolio2;
-    let GOOGL = new Stock('GOOGL', 100);
+    let GOOGL = new Stock('GOOGL', 100, 0.8);
 
     beforeEach(() => {
         portfolio1 = new Portfolio();
@@ -25,7 +25,7 @@ describe('Testing Portfolio Object functionality', function () {
     describe('Testing Portfolio object methods', function () {
 
         it('Test addStock method of Portfolio object', () => {
-            portfolio1.addStock('GOOGL', 100);
+            portfolio1.addStock('GOOGL', 100,0.8);
             expect(portfolio1.stockList).toEqual({
                 'GOOGL': GOOGL
             });
@@ -33,7 +33,7 @@ describe('Testing Portfolio Object functionality', function () {
             expect(portfolio1).not.toEqual(portfolio2);
         });
         it('Test resetPortfolio method of Portfolio object', () => {
-            portfolio1.addStock('GOOGL', 100);
+            portfolio1.addStock('GOOGL', 100,0.8);
             portfolio1.resetPortfolio();
             expect(portfolio1.stockList).toEqual({});
             expect(portfolio1.totalValue).toEqual(0);
@@ -66,10 +66,10 @@ describe('Testing Portfolio Object functionality', function () {
             expect(portfolio1.lastModified).not.toEqual(null);
 
             for (let key in portfolio1.stockList['AMZN']){
-                expect(portfolio1.stockList['AMZN'][key]).not.toEqual(null);
+                expect(portfolio1.stockList['AMZN'][key]).not.toBe(null);
             }
             for (let key in portfolio1.stockList['GOOGL']){
-                expect(portfolio1.stockList['GOOGL'][key]).not.toEqual(null);
+                expect(portfolio1.stockList['GOOGL'][key]).not.toBe(null);
             }
             
             let googlValue = portfolio1.stockList['GOOGL'].investmentAmount;

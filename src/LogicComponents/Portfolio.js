@@ -11,8 +11,8 @@ export default class Portfolio {
 
         id++;
     }
-    addStock(ticker, numshares) {
-        let stock = new Stock(ticker, numshares);
+    addStock(ticker, numshares, growth) {
+        let stock = new Stock(ticker, numshares, growth);
         this.stockList[ticker] = stock;  
     }
     //This function should update the stock information of all stocks in the portfolio
@@ -23,6 +23,14 @@ export default class Portfolio {
         for (let stock of keys) {
             await this.stockList[stock].fetchStockInfo();
             this.totalValue += this.stockList[stock].investmentAmount;
+        }   
+        this.analyzePortfolio();
+    }
+    analyzePortfolio() {
+        let keys = Object.keys(this.stockList);
+        this.lastModified = Date(Date.now());
+        for (let stock of keys) {
+            this.stockList[stock].analyzeStock(this.totalValue);
         }   
     }
     setName(name) {

@@ -1,11 +1,12 @@
 import Stock from '../LogicComponents/Stock';
 
 describe("Testing Stock Object functionality", function () {
-    let amzn = new Stock('AMZN', 100);
+    let amzn = new Stock('AMZN', 100, .82);
     describe('Testing creation of empty Stock object', function () {
         it('Test create Amazon Stock Object', () => {
             expect(amzn.ticker).toEqual('AMZN');
             expect(amzn.numShares).toEqual(100);
+            expect(amzn.growth).toEqual(0.82);
             expect(amzn.companyName).toEqual('');
             expect(amzn.latestTime).toEqual(null);
             expect(amzn.primaryExchange).toEqual(null);
@@ -22,6 +23,7 @@ describe("Testing Stock Object functionality", function () {
             expect(amzn.latestEPSDate).toEqual(null);
             expect(amzn.investmentAmount).toEqual(null);
             expect(amzn.latestPrice).toEqual(null);
+            expect(amzn.expectedReturn).toEqual(0);
         });
 
     });
@@ -44,6 +46,7 @@ describe("Testing Stock Object functionality", function () {
 
             expect(amzn.ticker).toEqual('AMZN');
             expect(amzn.numShares).toEqual(100);
+            expect(amzn.growth).toEqual(0.82);
             expect(amzn.companyName).toEqual('Amazon');
             expect(amzn.latestTime).toEqual('2/10/2019');
             expect(amzn.primaryExchange).toEqual('NASDAQ');
@@ -69,6 +72,7 @@ describe("Testing Stock Object functionality", function () {
             //Be sure the previously set stats using setBasicStats did NOT change for Amazon Stock object
             expect(amzn.ticker).toEqual('AMZN');
             expect(amzn.numShares).toEqual(100);
+            expect(amzn.growth).toEqual(0.82);
             expect(amzn.companyName).toEqual('Amazon');
             expect(amzn.latestTime).toEqual('2/10/2019');
             expect(amzn.primaryExchange).toEqual('NASDAQ');

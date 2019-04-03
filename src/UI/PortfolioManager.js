@@ -30,9 +30,10 @@ class PortfolioManager extends Component {
 
     handleStockSubmit(ev) {
         ev.preventDefault();
-        let ticker = document.getElementById('stock-ticker').value.toUpperCase();
-        let shares = document.getElementById('num-shares').value; 
-        this.state.portfolio.addStock(ticker, shares);
+        const ticker = document.getElementById('stock-ticker').value.toUpperCase();
+        const shares = document.getElementById('num-shares').value; 
+        const growth = document.getElementById('expected-growth');
+        this.state.portfolio.addStock(ticker, shares, growth);
         this.props.savePortfolio(this.state.portfolio); 
         ev.target.reset();
     }
@@ -110,7 +111,8 @@ class PortfolioManager extends Component {
                 
                 <form className={this.state.viewStocksHidden ? "hidden" : "stockForm"} onSubmit={this.handleStockSubmit.bind(this)}>
                     <input type="text" id ="stock-ticker" placeholder="Enter a stock symbol . . ." required/>
-                    <input type="number"id="num-shares" placeholder="Enter number of shares . . ." required />
+                    <input type="number" id="num-shares" placeholder="Enter number of shares . . ." required />
+                    <input type="number" id="expected-growth" step="any" placeholder="Enter the expected growth % for 1 year . . ." required />
                     <input type="submit" value="Add Stock to List"/>
                 </form>
                 

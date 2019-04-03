@@ -6,9 +6,10 @@ const stockStatsLink = '/stats';
 
 export default class Stock{
     
-    constructor(symbol, shares) {
+    constructor(symbol, shares, growth) {
         this.ticker = symbol;
         this.numShares = shares;
+        this.growth = growth;
         this.companyName = '';
         this.latestTime = null;
         this.primaryExchange = null;
@@ -25,6 +26,7 @@ export default class Stock{
         this.latestEPS = null;
         this.latestEPSDate = null;
         this.investmentAmount = null;  
+        this.expectedReturn = 0;
     }
 
     async fetchStockInfo() {
@@ -71,6 +73,13 @@ export default class Stock{
         this.dividendYield = stats.dividendYield;
         this.latestEPS = stats.latestEPS;
         this.latestEPSDate = stats.latestEPSDate;    
+    }
+    analyzeStock(portion) {
+        let growth = this.growth;
+        const totalPortfolioValue = portion;
+        const portionOfPortfolio = this.investmentAmount / totalPortfolioValue;
+        this.expectedReturn = (portionOfPortfolio * growth) * 0.8;
+
     }
 }
 
