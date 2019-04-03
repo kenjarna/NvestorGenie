@@ -26,6 +26,8 @@ export default class Stock{
         this.latestEPS = null;
         this.latestEPSDate = null;
         this.investmentAmount = null;  
+        this.weightedBeta = null;
+        this.portionOfPortfolio = null;
         this.expectedReturn = 0;
     }
 
@@ -75,10 +77,11 @@ export default class Stock{
         this.latestEPSDate = stats.latestEPSDate;    
     }
     analyzeStock(portion) {
-        let growth = this.growth;
+        const growth = this.growth;
         const totalPortfolioValue = portion;
-        const portionOfPortfolio = this.investmentAmount / totalPortfolioValue;
-        this.expectedReturn = (portionOfPortfolio * growth) * 0.8;
+        this.portionOfPortfolio = this.investmentAmount / totalPortfolioValue;
+        this.weightedBeta = this.beta * this.portionOfPortfolio;
+        this.expectedReturn = (this.portionOfPortfolio * growth) * 0.8;
 
     }
 }

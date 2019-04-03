@@ -32,7 +32,7 @@ class PortfolioManager extends Component {
         ev.preventDefault();
         const ticker = document.getElementById('stock-ticker').value.toUpperCase();
         const shares = document.getElementById('num-shares').value; 
-        const growth = document.getElementById('expected-growth');
+        const growth = document.getElementById('expected-growth').value;
         this.state.portfolio.addStock(ticker, shares, growth);
         this.props.savePortfolio(this.state.portfolio); 
         ev.target.reset();

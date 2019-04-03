@@ -24,7 +24,7 @@ const StockItem = ({ stock }) => {
 
             <td>
                 <div className="stock-shares">
-                    {stock.expectedReturn || "Not Yet Analyzed"}
+                    {stock.expectedReturn*100 + "%" || "Not Yet Analyzed"}
                 </div>
             </td>
         </tr>
