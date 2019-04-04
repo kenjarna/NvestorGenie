@@ -40,6 +40,7 @@ describe('Testing Portfolio Object functionality', function () {
             expect(portfolio1.id).toEqual(4);
             expect(portfolio1.title).toEqual("");
             expect(portfolio1.comments).toEqual("");
+            expect(portfolio1.expectedAnnualReturn).toEqual(0);
 
         });
         it('Test updatePortfolio method of Portfolio object on empty stock list', () => {
@@ -140,9 +141,14 @@ describe('Testing Portfolio Object functionality', function () {
             expect(amzn.portionOfPortfolio).toEqual(amzn.investmentAmount / calculatedTotalValue);
             expect(googl.portionOfPortfolio).toEqual(googl.investmentAmount / calculatedTotalValue);
             expect(amzn.weightedBeta).toBeCloseTo(46.1359, 4);
-            expect(amzn.expectedReturn).toBeCloseTo(.54679612, 8);
+            expect(amzn.expectedGrowthReturn).toBeCloseTo(0.54679612, 8);
+            expect(amzn.expectedRecessionReturn).toBeCloseTo(-0.03417476, 8);
+            expect(amzn.expectedReturn).toBeCloseTo(0.5126,4);
             expect(googl.weightedBeta).toBeCloseTo(1.45631, 5);
-            expect(googl.expectedReturn).toBeCloseTo(0.08737864,8);
+            expect(googl.expectedGrowthReturn).toBeCloseTo(0.08737864,8);
+            expect(googl.expectedRecessionReturn).toBeCloseTo(-0.00582524,8);
+            expect(googl.expectedReturn).toBeCloseTo(0.0816,4);
+        
         });
     });
 
