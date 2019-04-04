@@ -4,9 +4,9 @@ const baseAPILink = 'https://api.iextrading.com/1.0/stock/';
 const quoteLink = '/batch?types=quote';
 const stockStatsLink = '/stats';
 
-export default class Stock{
-    
-    constructor(symbol, shares, growth) {
+export default class Stock {
+
+    constructor(symbol, shares, growth, stockObj = null) {
         this.ticker = symbol;
         this.numShares = shares;
         this.growth = growth;
@@ -25,12 +25,41 @@ export default class Stock{
         this.dividendYield = null;
         this.latestEPS = null;
         this.latestEPSDate = null;
-        this.investmentAmount = null;  
+        this.investmentAmount = null;
         this.weightedBeta = null;
         this.portionOfPortfolio = null;
         this.expectedGrowthReturn = 0;
         this.expectedRecessionReturn = 0;
         this.expectedReturn = 0;
+
+        this.createStockFromObject(stockObj);
+    }
+
+    createStockFromObject(object) {
+        if (object === null) { return; }
+        else {
+            this.companyName = object.companyName;
+            this.latestTime = object.latestTime;
+            this.primaryExchange = object.primaryExchange;
+            this.latestPrice = object.latestPrice;
+            this.PERatio = object.PERatio;
+            this.week52High = object.week52High;
+            this.week52Low = object.week52Low;
+            this.ytdChange = object.ytdChange;
+            this.closePrice = object.closePrice;
+            this.openPrice = object.openPrice;
+            this.beta = object.beta;
+            this.dividendRate = object.dividendRate;
+            this.dividendYield = object.dividendYield;
+            this.latestEPS = object.latestEPS;
+            this.latestEPSDate = object.latestEPSDate;
+            this.investmentAmount = object.investmentAmount;
+            this.weightedBeta = object.weightedBeta;
+            this.portionOfPortfolio = object.portionOfPortfolio;
+            this.expectedGrowthReturn = object.expectedGrowthReturn;
+            this.expectedRecessionReturn = object.expectedRecessionReturn;
+            this.expectedReturn = object.expectedReturn;
+        }
     }
 
     async fetchStockInfo() {
@@ -46,9 +75,9 @@ export default class Stock{
                 const stats = response.data;
                 this.setStockInfo(stats);
             });
-     
+
     }
-    buildLink(type,ticker) {
+    buildLink(type, ticker) {
         if (type === 'quote') {
             return baseAPILink + ticker + quoteLink;
         }
@@ -76,7 +105,7 @@ export default class Stock{
         this.dividendRate = stats.dividendRate;
         this.dividendYield = stats.dividendYield;
         this.latestEPS = stats.latestEPS;
-        this.latestEPSDate = stats.latestEPSDate;    
+        this.latestEPSDate = stats.latestEPSDate;
     }
     analyzeStock(portion) {
         const growth = this.growth;
@@ -84,7 +113,7 @@ export default class Stock{
         this.portionOfPortfolio = this.investmentAmount / totalPortfolioValue;
         this.weightedBeta = this.beta * this.portionOfPortfolio;
         this.expectedGrowthReturn = (this.portionOfPortfolio * growth) * 0.8;
-        this.expectedRecessionReturn = (this.portionOfPortfolio*-0.2) * 0.2;
+        this.expectedRecessionReturn = (this.portionOfPortfolio * -0.2) * 0.2;
         this.expectedReturn = this.expectedGrowthReturn + this.expectedRecessionReturn;
     }
 }
