@@ -1,7 +1,7 @@
 import Stock from './Stock.js';
 
 export default class Portfolio {
-    constructor(title = '', comments = ''){
+    constructor(title = '', comments = '', object = null){
         this.stockList = {};
         this.totalValue = 0;
         this.title = title;
@@ -10,12 +10,24 @@ export default class Portfolio {
         this.id = id;
         this.expectedAnnualReturn = 0;
 
+        this.createPortfolioFromObject(object);
+
         id++;
     }
     addStock(ticker, numshares, growth) {
         let stock = new Stock(ticker, numshares, growth);
         this.stockList[ticker] = stock;  
     }
+    createPortfolioFromObject(object) {
+        if (object === null) { return; }
+        else {
+            this.stockList = object.stockList;
+            this.totalValue = object.totalValue;
+            this.lastModified = object.lastModified;
+            this.expectedAnnualReturn = object.expectedAnnualReturn;
+        }
+    }
+
     //This function should update the stock information of all stocks in the portfolio
     async updatePortfolio() {
         let keys = Object.keys(this.stockList);

@@ -6,7 +6,7 @@ const stockStatsLink = '/stats';
 
 export default class Stock{
     
-    constructor(symbol, shares, growth) {
+    constructor(symbol, shares, growth, stockObj = null) {
         this.ticker = symbol;
         this.numShares = shares;
         this.growth = growth;
@@ -31,6 +31,36 @@ export default class Stock{
         this.expectedGrowthReturn = 0;
         this.expectedRecessionReturn = 0;
         this.expectedReturn = 0;
+
+        this.createStockFromObject(stockObj);
+    }
+
+    createStockFromObject(object) {
+        console.log(object);
+        if (object === null) { return; }
+        else {
+            this.companyName = object.companyName;
+            this.latestTime = object.latestTime;
+            this.primaryExchange = object.primaryExchange;
+            this.latestPrice = object.latestPrice;
+            this.PERatio = object.PERatio;
+            this.week52High = object.week52High;
+            this.week52Low = object.week52Low;
+            this.ytdChange = object.ytdChange;
+            this.closePrice = object.closePrice;
+            this.openPrice = object.openPrice;
+            this.beta = object.beta;
+            this.dividendRate = object.dividendRate;
+            this.dividendYield = object.dividendYield;
+            this.latestEPS = object.latestEPS;
+            this.latestEPSDate = object.latestEPSDate;
+            this.investmentAmount = object.investmentAmount;
+            this.weightedBeta = object.weightedBeta;
+            this.portionOfPortfolio = object.portionOfPortfolio;
+            this.expectedGrowthReturn = object.expectedGrowthReturn;
+            this.expectedRecessionReturn = object.expectedRecessionReturn;
+            this.expectedReturn = object.expectedReturn;
+        }
     }
 
     async fetchStockInfo() {
