@@ -86,7 +86,8 @@
 .portfolioList ul#portfolios li:hover .portfolio *,
 .portfolioList ul#portfolios a.active li,
 .portfolioList ul#portfolios a.active li .portfolio-comments *,
-.portfolioList ul#portfolios a.active li .portfolio-title  {
+.portfolioList ul#portfolios a.active li .portfolio-title,
+.portfolioList ul#portfolios a.active li .portfolio-return {
   color: #fff !important;
   text-decoration: none !important;
 }
@@ -117,9 +118,18 @@
   background: none;
   border: none;
 }
+.portfolioList ul#portfolios li .portfolio-return * {
+  font-size: 1em !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #999 !important;
+  background: none;
+  border: none;
+}
+
 .portfolioList ul#portfolios li .portfolio {
   display: block;
-  height: 100px;
+  height: 150px;
   padding: 1em;
   text-decoration: none;
 }

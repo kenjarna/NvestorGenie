@@ -24,7 +24,7 @@ const StockItem = ({ stock }) => {
 
             <td>
                 <div className="stock-shares">
-                    {stock.expectedReturn*100 + "%" || "Not Yet Analyzed"}
+                    {Number.parseFloat(stock.expectedReturn*100).toPrecision(4) + "%"}
                 </div>
             </td>
         </tr>

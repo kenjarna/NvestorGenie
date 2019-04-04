@@ -16,6 +16,9 @@ const PortfolioItem = ({ portfolio,setCurrentPortfolio }) => {
                         dangerouslySetInnerHTML={{__html: portfolio.comments}}
                     >
                     </div>
+                    <div className="portfolio-return">
+                        {"Expected Annual Return: " + Number.parseFloat(portfolio.expectedAnnualReturn*100).toPrecision(4) + "%"}
+                    </div>
                 </div>
             </li>
         </a>
