@@ -28,6 +28,8 @@ export default class Stock{
         this.investmentAmount = null;  
         this.weightedBeta = null;
         this.portionOfPortfolio = null;
+        this.expectedGrowthReturn = 0;
+        this.expectedRecessionReturn = 0;
         this.expectedReturn = 0;
     }
 
@@ -81,8 +83,9 @@ export default class Stock{
         const totalPortfolioValue = portion;
         this.portionOfPortfolio = this.investmentAmount / totalPortfolioValue;
         this.weightedBeta = this.beta * this.portionOfPortfolio;
-        this.expectedReturn = (this.portionOfPortfolio * growth) * 0.8;
-
+        this.expectedGrowthReturn = (this.portionOfPortfolio * growth) * 0.8;
+        this.expectedRecessionReturn = (this.portionOfPortfolio*-0.2) * 0.2;
+        this.expectedReturn = this.expectedGrowthReturn + this.expectedRecessionReturn;
     }
 }
 

@@ -8,6 +8,7 @@ export default class Portfolio {
         this.lastModified = Date(Date.now());
         this.comments = comments;
         this.id = id;
+        this.expectedAnnualReturn = 0;
 
         id++;
     }
@@ -31,7 +32,15 @@ export default class Portfolio {
         this.lastModified = Date(Date.now());
         for (let stock of keys) {
             this.stockList[stock].analyzeStock(this.totalValue);
-        }   
+        }  
+        this.updatePortfolioReturn();
+    }
+    updatePortfolioReturn() {
+        let keys = Object.keys(this.stockList);
+        this.expectedAnnualReturn = 0;
+        for (let stock of keys){
+            this.expectedAnnualReturn += this.stockList[stock].expectedReturn * this.stockList[stock].portionOfPortfolio;
+        }
     }
     setName(name) {
         this.title = name;
@@ -47,6 +56,7 @@ export default class Portfolio {
         this.lastModified = Date(Date.now());
         this.comments = "";
         this.title = "";
+        this.expectedAnnualReturn = 0;
     }
 }
 
