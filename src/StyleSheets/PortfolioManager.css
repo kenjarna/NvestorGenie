@@ -1,0 +1,84 @@
+.portfolioManager{
+    flex-grow: 1;
+    padding: 0 3rem;
+}
+
+button #rte {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+}
+
+
+.stockForm {
+    position: relative;
+    right: 5rem;
+}
+
+.portfolioManager form {
+    margin: 0rem auto 0;
+    padding-top: 0.5rem;
+    max-width: 80rem;
+}
+input[name="title"] {
+    padding-top: 1em;
+    border: none;
+    font-size: 200%;
+    font-family: "Fauna One";
+    color: #008BF8;
+    font-weight: 400;
+    width: 100%;
+}
+input[name="title"] {
+    outline: none;
+}
+
+.RichTextEditor__root___2QXK- {
+    border: none;
+}
+
+.EditorToolbar__root___3_Aqz {
+    border: none;
+    position: absolute;
+    top: 2.2rem;
+    white-space: nowrap;
+    
+}
+
+.RichTextEditor__root___2QXK- .public-DraftEditor-content {
+    height: 20em;
+    border: 1px solid lightgray;
+}
+
+.RichTextEditor__root___2QXK- .public-DraftEditor-content [data-contents="true"] {
+    margin-left: 17px;
+    margin-right: 17px;
+}
+
+/* Dropdown */
+@media screen and (max-width: 726px) {
+    .Dropdown__root___3ALmx {
+        display: none;
+    }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .Dropdown__root___3ALmx select {
+        border: 0;
+        border-left: 3px solid transparent;
+    }
+}
+.Dropdown__root___3ALmx select {
+    height: 26px;
+    margin: 0;
+    padding: 0;
+}
+.Dropdown__root___3ALmx .Dropdown__value___34Py9 {
+    line-height: 23px;
+    border: 0
+}
+
+.hidden {
+    display: none;
+}
