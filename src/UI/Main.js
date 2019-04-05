@@ -3,12 +3,17 @@ import '../StyleSheets/Main.css';
 
 import PortfolioManager from './PortfolioManager';
 import PortfolioList from './PortfolioList';
-import Sidebar from './Sidebar';
+
+
+/* Main.js
+*   Purpose: Disseminate information from props received from App.js to the correct React component
+*   Result:  Components recieved the correct properties necessary to complete their purpose
+*   Member Functions: N/A
+*/
 
 const Main = (props) => {
     return (
         <div className="Main">
-            <Sidebar />
             <PortfolioList
                 portfolios={props.portfolios}
                 setCurrentPortfolio={props.setCurrentPortfolio}

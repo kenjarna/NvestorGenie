@@ -2,6 +2,15 @@ import React from 'react';
 import PortfolioItem from './PortfolioListItem';
 import '../StyleSheets/PortfolioList.css';
 
+/* PortfolioList.js
+*   Purpose: Render the list of the portfolios and allow for the user to analyze all portfolios in a single click
+*   Result:  The portfolio list is created based on what items are returned from the portfolioListItem component.
+             The user is also able to analyze all portfolios in the current list.
+*   Member Functions: N/A
+*
+*
+*/
+
 const PortfolioList = ({ portfolios, setCurrentPortfolio, savePortfolio }) => {
     const portfolioIds = Object.keys(portfolios);
     return (

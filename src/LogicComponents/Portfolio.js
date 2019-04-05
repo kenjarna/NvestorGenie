@@ -1,5 +1,22 @@
 import Stock from './Stock.js';
 
+/* Portfolio.js
+*   Purpose: Create portfolio objects
+*   Result:  Portfolio objects created and can be manipulated using the webpage
+*   Member Functions:
+*       addStock                  - add a stock to the active portfolio's stockList object (thus, creating a dictionary of stockObjects)
+*       createPortfolioFromObject - given an object reflecting a portfolio, convert it into a Portfolio. Generally used
+*                                      to allow loading of portfolio objects as they don't keep the Portfolio prototype upon storage
+*       updatePortfolio           - updates the stock information of all stocks in the portfolio. Once the information has been fetched,
+*                                      the portfolio analyses the stocks using analyzePortfolio
+*       analyzePortfolio          - for every stock in the stockList, analyze the value of the stock. Then, use updatePortfolioReturn to determine
+*                                      and set the value of the portfolio's expected annual return
+*       updatePortfolioReturn     - calculate/update the portfolio's expected annual return
+*       setName                   - save changes from title alterations in the interactive part of the webpage
+*       setComments               - save changes from comment alterations in the interactive part of the webpage
+*       resetPortfolio            - reset the portfolio to initial values outlined in the constructor
+*/
+
 export default class Portfolio {
     constructor(title = '', comments = '', object = null) {
         this.stockList = {};
@@ -27,8 +44,6 @@ export default class Portfolio {
             this.expectedAnnualReturn = object.expectedAnnualReturn;
         }
     }
-
-    //This function should update the stock information of all stocks in the portfolio
     async updatePortfolio() {
         let keys = Object.keys(this.stockList);
         this.lastModified = Date(Date.now());

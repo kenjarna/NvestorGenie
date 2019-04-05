@@ -4,6 +4,18 @@ import Main from './Main'
 import Portfolio from '../LogicComponents/Portfolio';
 import Stock from '../LogicComponents/Stock';
 
+
+/* App.js
+*   Purpose: To store app state and contain the information pertinent to the app's functionality
+*   Result:  Loads previously stored portfolios and allows the user to save new or update older portfolios to the general application
+             Controls the flow of information from the top down using React Components
+*   Member Functions:
+*       componentDidMount      - called when the component mounts to the DOM. Handles loading the information from localStorage when App mounts
+*       createPortfolioObjects - helper function for componentDidMount; takes the portfolios stored in the localStorage and converts them back to Portfolio Objects
+*       createStockObjects     - similar to createPortfolioObjects, but takes a portfolio's stockList and turns them into Stock Objects
+*       savePortfolio          - used to update the app's state from the PortfolioManager to store changes to a portfolio
+*       setCurrentPortfolio    - used to tell the PortfolioManager component which portfolio is currently being used/altered by the user
+*/
 class App extends Component {
     constructor() {
         super()
@@ -15,36 +27,43 @@ class App extends Component {
     }
 
     componentDidMount() {
-        let loadedPortfolioList = {};
-
         if (localStorage.getItem('portfolios')) {
             const portfolios = JSON.parse(localStorage.getItem('portfolios'));
             this.setState({ portfolios: {} });
-            const portfolioKeys = Object.keys(portfolios);
-            //Must change the portfolios from local storage back into portfolio objects
-            for (let portfolioId of portfolioKeys) {
-                let stockList = {};
-                let portfolioObj = portfolios[portfolioId];
-                loadedPortfolioList[portfolioId] = new Portfolio(portfolioObj.title, portfolioObj.comments, portfolioObj);
-                let loadedPortfolioObj = loadedPortfolioList[portfolioId];
-
-                let stockKeys = Object.keys(loadedPortfolioObj.stockList);
-                //Must change the stocks in each portfolio's stockList from local storage back into Stock objects
-                for (let stockId of stockKeys) {
-                    let stockObj = loadedPortfolioObj.stockList[stockId];
-                    stockList[stockId] = new Stock(stockObj.ticker, stockObj.numShares, stockObj.growth, stockObj);
-                }
-
-                loadedPortfolioObj.stockList = stockList;
-            }
-
+            let loadedPortfolioList = this.createPortfolioObjects(portfolios);        
             this.setState({
                 portfolios: loadedPortfolioList
             });
         }
     }
 
-    //Action handed to StockFetcher component to set app's state to the filtered stock information
+    createPortfolioObjects = (portfolios) => {
+        let loadedPortfolioList = {};
+        let loadedPortfolioObj;
+        const portfolioKeys = Object.keys(portfolios);
+        for (let portfolioId of portfolioKeys) {
+            let portfolioObj = portfolios[portfolioId];
+            //Each portfolio we find, create a portfolio object from it
+            loadedPortfolioList[portfolioId] = new Portfolio(portfolioObj.title, portfolioObj.comments, portfolioObj);
+            loadedPortfolioObj = loadedPortfolioList[portfolioId];
+            let stockList = this.createStockObjects(loadedPortfolioObj);
+            loadedPortfolioObj.stockList = stockList;
+        }
+        this.createStockObjects(loadedPortfolioObj);
+        return loadedPortfolioList;
+    }
+
+    createStockObjects = (portfolioObject) => {
+        let stockList = {};
+        let stockKeys = Object.keys(portfolioObject.stockList);
+        for (let stockId of stockKeys) {
+            //Each stock we find, create a stock object from it
+            let stockObj = portfolioObject.stockList[stockId];
+            stockList[stockId] = new Stock(stockObj.ticker, stockObj.numShares, stockObj.growth, stockObj);
+        }
+        return stockList;
+    }
+
     savePortfolio = (data) => {
         const portfolios = { ...this.state.portfolios }
         if (!Object.keys(portfolios).includes(data.id)) {
@@ -55,11 +74,6 @@ class App extends Component {
         localStorage.setItem('currentPortfolio', JSON.stringify(this.state.currentPortfolio));
     }
 
-    removeStock = (ticker) => {
-        const stocks = { ...this.state.portfolio };
-        delete stocks[ticker];
-    }
-
     setCurrentPortfolio = (portfolio) => {
         this.setState({ currentPortfolio: portfolio });
     }
@@ -67,7 +81,6 @@ class App extends Component {
     render() {
         const actions = {
             savePortfolio: this.savePortfolio,
-            removeStock: this.removeStock,
             setCurrentPortfolio: this.setCurrentPortfolio,
         }
         return (

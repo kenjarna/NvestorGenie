@@ -4,6 +4,19 @@ const baseAPILink = 'https://api.iextrading.com/1.0/stock/';
 const quoteLink = '/batch?types=quote';
 const stockStatsLink = '/stats';
 
+/* Stock.js
+*   Purpose: Create stock objects 
+*   Result:  Stock objects have been created and can alter a stock's value using member functions
+*   Member Functions:
+*       createStockFromObject - given a stock dictionary value, create a new stock object
+*       fetchStockInfo        - async function to fetch the stock information using IEX Finance API
+*       buildLink             - build the link used for the IEX Finance API
+*       setBasicStats         - set the basic stats of a stock object for later analysis
+*       setStockInfo          - set additional information necessary for the analysis. Needed because IEX Finance API doesn't include
+*                                  this with the information set in the setBasicStats request.
+*       analyzeStock          - use the standard methods for analyzing a stock to determine it's expected annual return
+*/
+
 export default class Stock {
 
     constructor(symbol, shares, growth, stockObj = null) {
@@ -98,8 +111,6 @@ export default class Stock {
         this.openPrice = quote.open;
         this.investmentAmount = this.latestPrice * this.numShares;
     }
-
-
     setStockInfo(stats) {
         this.beta = stats.beta;
         this.dividendRate = stats.dividendRate;

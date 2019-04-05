@@ -5,6 +5,21 @@ import Portfolio from '../LogicComponents/Portfolio.js';
 import StockList from './StockList';
 import '../StyleSheets/PortfolioManager.css';
 
+/* PortfolioManager.js
+*   Purpose:    Manage a portfolio. Allow a user to change the title and comments, create new portfolios, add stocks to the stock list
+                and analyze the stocks as well as the portfolio object.
+*   Result:     The user is able to see the basic portfolio information as well as an annual expected return for individual stocks and the portfolio
+*   Member Functions:
+*        componentDidUpdate  - once changes are made to the app's state and new props are recieved, be sure to update this component to reflect those changes
+*        handleStockSubmit   - take the information entered from user input on the stock form (ticker, number of shares, growth) and add that stock to the
+*                                portfolio's stockList. Then, save that updated portfolio using savePortfolio from the App's props
+*        handleTitleChanges  - save all changes to the title of a portfolio using savePortfolio from App's props
+*        handleEditorChanges - save all changes to the comments of a portoflio using savePortfolio from App's props
+*        editPortfolio       - toggle view to show the "edit" portion of the portfolio (allowing the user to change the title and comments of a portfolio)
+*        viewPortfolio       - toggle view to show the "view" portion of the portfolio (allowing the user to add stocks to the portfolio's stock list)
+*        fetchStocks         - get the stocks for a portfolio and analyze those stocks in the process (called after hitting the "Analyze Portfolio" button)
+*/
+
 class PortfolioManager extends Component {
     constructor(props) {
         

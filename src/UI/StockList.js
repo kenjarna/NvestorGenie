@@ -3,6 +3,11 @@ import StockItem from './StockItem';
 
 import '../StyleSheets/StockList.css';
 
+/* StockList.js
+*   Purpose:    Create a stock list to display the important information regarding the stocks in the portfolio to the user
+*   Result:     Render a list of stocks for the user to see in the portfolio stock list editor
+*   Member Functions: N/A
+*/
 
 const StockList = ({ stockList }) => {
     const stockIds = Object.keys(stockList);

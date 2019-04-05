@@ -1,5 +1,11 @@
 import React from 'react';
 
+/* StockItem.js
+*   Purpose:    Dynamically populate the stock list displayed to the user on the stock edit portion of the portfolioManager
+*   Result:     Render the stock information correctly within the table of stocks
+*   Member Functions: N/A
+*/
+
 const StockItem = ({ stock }) => {
     return (
 
