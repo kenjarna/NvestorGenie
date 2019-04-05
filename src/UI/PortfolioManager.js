@@ -18,6 +18,7 @@ import '../StyleSheets/PortfolioManager.css';
 *        editPortfolio       - toggle view to show the "edit" portion of the portfolio (allowing the user to change the title and comments of a portfolio)
 *        viewPortfolio       - toggle view to show the "view" portion of the portfolio (allowing the user to add stocks to the portfolio's stock list)
 *        fetchStocks         - get the stocks for a portfolio and analyze those stocks in the process (called after hitting the "Analyze Portfolio" button)
+*        removeStock         - remove a specific stock from the active portfolio's stock list
 */
 
 class PortfolioManager extends Component {
