@@ -139,6 +139,9 @@
   right:30px;
 }
 
-#runReport {
-  align-content: center;
+.remove-portfolio {
+  position: absolute;
+  right: 3rem;
+  background: none;
+  border: none;
 }

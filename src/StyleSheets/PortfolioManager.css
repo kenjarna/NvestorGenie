@@ -3,12 +3,12 @@
     padding: 0 3rem;
 }
 
-button #rte {
+button {
     border: none;
     background: none;
     cursor: pointer;
     outline: none;
-    padding: 0;
+    padding: .25em;
 }
 
 

@@ -24,13 +24,17 @@ const PortfolioItem = ({ portfolio,setCurrentPortfolio,removePortfolio }) => {
                         dangerouslySetInnerHTML={{__html: portfolio.comments}}
                     >
                     </div>
+                    <button className="remove-portfolio" 
+                            onClick={() => {removePortfolio(portfolio)}}
+                            title="Delete Portfolio"
+                    >
+                        <i className="fa fa-trash-o"></i>
+                    </button>
                     <div className="portfolio-return">
                         {"Expected Annual Return: " + Number.parseFloat(portfolio.expectedAnnualReturn*100).toPrecision(4) + "%"}
                     </div>
                 </div>
-                <button onClick={() => {removePortfolio(portfolio)}}>
-                    <i className="fa fa-trash-o"></i>
-                </button>
+
             </li>
         </a>
     )
