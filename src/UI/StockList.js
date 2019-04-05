@@ -9,7 +9,7 @@ import '../StyleSheets/StockList.css';
 *   Member Functions: N/A
 */
 
-const StockList = ({ stockList }) => {
+const StockList = ({ stockList, removeStock }) => {
     const stockIds = Object.keys(stockList);
 
     return (
@@ -24,6 +24,8 @@ const StockList = ({ stockList }) => {
                         <th> Company Name</th>
 
                         <th> Annual Expected Return</th>
+
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +33,7 @@ const StockList = ({ stockList }) => {
                         <StockItem
                             key={stockId}
                             stock={stockList[stockId]}
+                            removeStock={removeStock}
                         />
                     ))}
                 </tbody>

@@ -6,7 +6,7 @@ import React from 'react';
 *   Member Functions: N/A
 */
 
-const StockItem = ({ stock }) => {
+const StockItem = ({ stock, removeStock }) => {
     return (
 
         <tr>
@@ -31,6 +31,13 @@ const StockItem = ({ stock }) => {
             <td>
                 <div className="stock-shares">
                     {Number.parseFloat(stock.expectedReturn*100).toPrecision(4) + "%"}
+                </div>
+            </td>
+            <td>
+                <div className="remove-stock">
+                    <button onClick={()=>{removeStock(stock)}}>
+                        <i className="fa fa-trash-o"></i>
+                    </button>
                 </div>
             </td>
         </tr>

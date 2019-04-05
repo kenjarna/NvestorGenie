@@ -85,6 +85,19 @@ class PortfolioManager extends Component {
         )
     }
 
+    removeStock = (stockObj) => {
+        const portfolio = this.state.portfolio;
+        const lessStock = portfolio.stockList
+        const key = Object.keys(lessStock).find(key => lessStock[key] === stockObj);
+
+        delete lessStock[key];
+        portfolio.stockList = lessStock;
+        this.setState({portfolio: portfolio});
+        this.props.savePortfolio(portfolio);
+
+        this.state.portfolio.updatePortfolio();
+    }
+
     async fetchStocks (rawPortfolio) {
         await rawPortfolio.updatePortfolio();
 
@@ -134,6 +147,7 @@ class PortfolioManager extends Component {
                 <div className={this.state.viewStocksHidden ? "hidden" : "portfolioStockList"}>
                     <StockList
                         stockList={this.state.portfolio.stockList}
+                        removeStock={this.removeStock}
                     />
                 </div>
                 

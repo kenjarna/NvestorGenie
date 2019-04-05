@@ -83,7 +83,7 @@ class App extends Component {
         const lessPortfolios = this.state.portfolios;
         const key = Object.keys(lessPortfolios).find(key => lessPortfolios[key] === portfolioObj);
         delete lessPortfolios[key];
-        this.setState({portfolio:lessPortfolios});
+        this.setState({portfolios:lessPortfolios});
         this.saveToLocalStorage();
     }
     
