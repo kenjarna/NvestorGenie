@@ -11,7 +11,7 @@ import '../StyleSheets/PortfolioList.css';
 *
 */
 
-const PortfolioList = ({ portfolios, setCurrentPortfolio, savePortfolio }) => {
+const PortfolioList = ({ portfolios, setCurrentPortfolio, savePortfolio, removePortfolio }) => {
     const portfolioIds = Object.keys(portfolios);
     return (
         <div className="portfolioList">
@@ -22,13 +22,14 @@ const PortfolioList = ({ portfolios, setCurrentPortfolio, savePortfolio }) => {
                         key={portfolioId}
                         portfolio={portfolios[portfolioId]}
                         setCurrentPortfolio={setCurrentPortfolio}
+                        removePortfolio = {removePortfolio}
                     />
                 ))}
             </ul>
             <div className="actionBar">
                 <button 
                     id="printReport" 
-                    onClick={console.log("print report")}
+                    onClick={() => {console.log("print report")}}
                     title="Run Report"> Print Report
                 </button>
                 <button 

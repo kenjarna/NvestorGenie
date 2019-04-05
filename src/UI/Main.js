@@ -18,6 +18,7 @@ const Main = (props) => {
                 portfolios={props.portfolios}
                 setCurrentPortfolio={props.setCurrentPortfolio}
                 savePortfolio={props.savePortfolio}
+                removePortfolio = {props.removePortfolio}
             />
             <PortfolioManager
                 savePortfolio={props.savePortfolio}

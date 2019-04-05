@@ -8,7 +8,7 @@ import React from 'react';
 *
 */
 
-const PortfolioItem = ({ portfolio,setCurrentPortfolio }) => {
+const PortfolioItem = ({ portfolio,setCurrentPortfolio,removePortfolio }) => {
     const handleClick = () => {
         setCurrentPortfolio(portfolio);
 
@@ -28,6 +28,9 @@ const PortfolioItem = ({ portfolio,setCurrentPortfolio }) => {
                         {"Expected Annual Return: " + Number.parseFloat(portfolio.expectedAnnualReturn*100).toPrecision(4) + "%"}
                     </div>
                 </div>
+                <button onClick={() => {removePortfolio(portfolio)}}>
+                    <i className="fa fa-trash-o"></i>
+                </button>
             </li>
         </a>
     )

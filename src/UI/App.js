@@ -15,6 +15,7 @@ import Stock from '../LogicComponents/Stock';
 *       createStockObjects     - similar to createPortfolioObjects, but takes a portfolio's stockList and turns them into Stock Objects
 *       savePortfolio          - used to update the app's state from the PortfolioManager to store changes to a portfolio
 *       setCurrentPortfolio    - used to tell the PortfolioManager component which portfolio is currently being used/altered by the user
+*       saveToLocalStorage     - save the currentPortfolio and portfolios stored in the App's state to the local storage for retrieval later
 */
 class App extends Component {
     constructor() {
@@ -27,7 +28,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('portfolios')) {
+        if (Object.keys(localStorage.getItem('portfolios')).length !== 2) {
             const portfolios = JSON.parse(localStorage.getItem('portfolios'));
             this.setState({ portfolios: {} });
             let loadedPortfolioList = this.createPortfolioObjects(portfolios);        
@@ -65,15 +66,27 @@ class App extends Component {
     }
 
     savePortfolio = (data) => {
-        const portfolios = { ...this.state.portfolios }
+        const portfolios = { ...this.state.portfolios };
         if (!Object.keys(portfolios).includes(data.id)) {
             portfolios[data.id] = data;
         }
         this.setState({ portfolios });
+        this.saveToLocalStorage();
+    }
+
+    saveToLocalStorage = () => {
         localStorage.setItem('portfolios', JSON.stringify(this.state.portfolios));
         localStorage.setItem('currentPortfolio', JSON.stringify(this.state.currentPortfolio));
     }
 
+    removePortfolio = (portfolioObj) => {
+        const lessPortfolios = this.state.portfolios;
+        const key = Object.keys(lessPortfolios).find(key => lessPortfolios[key] === portfolioObj);
+        delete lessPortfolios[key];
+        this.setState({portfolio:lessPortfolios});
+        this.saveToLocalStorage();
+    }
+    
     setCurrentPortfolio = (portfolio) => {
         this.setState({ currentPortfolio: portfolio });
     }
@@ -82,6 +95,7 @@ class App extends Component {
         const actions = {
             savePortfolio: this.savePortfolio,
             setCurrentPortfolio: this.setCurrentPortfolio,
+            removePortfolio: this.removePortfolio,
         }
         return (
 
