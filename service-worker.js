@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/kenjarna/NvestorGenie/precache-manifest.3275f27e80d7703bbd2eb05bedb4babe.js"
+  "/NvestorGenie/precache-manifest.3554445ee2b2f76c18a173ba6397fe3a.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/kenjarna/NvestorGenie/index.html", {
+workbox.routing.registerNavigationRoute("/NvestorGenie/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

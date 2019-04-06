@@ -1,13 +1,13 @@
 {
-  "main.css": "/kenjarna/NvestorGenie/static/css/main.77f047a5.chunk.css",
-  "main.js": "/kenjarna/NvestorGenie/static/js/main.c210bc86.chunk.js",
-  "main.js.map": "/kenjarna/NvestorGenie/static/js/main.c210bc86.chunk.js.map",
-  "static/js/1.d5df0ee8.chunk.js": "/kenjarna/NvestorGenie/static/js/1.d5df0ee8.chunk.js",
-  "static/js/1.d5df0ee8.chunk.js.map": "/kenjarna/NvestorGenie/static/js/1.d5df0ee8.chunk.js.map",
-  "runtime~main.js": "/kenjarna/NvestorGenie/static/js/runtime~main.9aab35c3.js",
-  "runtime~main.js.map": "/kenjarna/NvestorGenie/static/js/runtime~main.9aab35c3.js.map",
-  "static/css/main.77f047a5.chunk.css.map": "/kenjarna/NvestorGenie/static/css/main.77f047a5.chunk.css.map",
-  "index.html": "/kenjarna/NvestorGenie/index.html",
-  "precache-manifest.3275f27e80d7703bbd2eb05bedb4babe.js": "/kenjarna/NvestorGenie/precache-manifest.3275f27e80d7703bbd2eb05bedb4babe.js",
-  "service-worker.js": "/kenjarna/NvestorGenie/service-worker.js"
+  "main.css": "/NvestorGenie/static/css/main.77f047a5.chunk.css",
+  "main.js": "/NvestorGenie/static/js/main.2ee78d28.chunk.js",
+  "main.js.map": "/NvestorGenie/static/js/main.2ee78d28.chunk.js.map",
+  "static/js/1.d5df0ee8.chunk.js": "/NvestorGenie/static/js/1.d5df0ee8.chunk.js",
+  "static/js/1.d5df0ee8.chunk.js.map": "/NvestorGenie/static/js/1.d5df0ee8.chunk.js.map",
+  "runtime~main.js": "/NvestorGenie/static/js/runtime~main.1f14714a.js",
+  "runtime~main.js.map": "/NvestorGenie/static/js/runtime~main.1f14714a.js.map",
+  "static/css/main.77f047a5.chunk.css.map": "/NvestorGenie/static/css/main.77f047a5.chunk.css.map",
+  "index.html": "/NvestorGenie/index.html",
+  "precache-manifest.3554445ee2b2f76c18a173ba6397fe3a.js": "/NvestorGenie/precache-manifest.3554445ee2b2f76c18a173ba6397fe3a.js",
+  "service-worker.js": "/NvestorGenie/service-worker.js"
 }
