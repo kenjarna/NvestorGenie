@@ -12,7 +12,6 @@
   bottom: 0;
   border-top: 1px solid #eee;
   width: 100%;
-  z-index: -1;
 }
 
 .actionBar button {
