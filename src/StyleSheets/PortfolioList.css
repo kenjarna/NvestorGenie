@@ -1,18 +1,18 @@
 .portfolioList {
   border-left: 1px solid #eee;
   border-right: 10px solid #eee;
-  border-bottom: 0px;
   width: 50rem;
   position: relative;
   text-align: center;
 }
 
 .actionBar {
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   border-top: 1px solid #eee;
   width: 100%;
+  z-index: -1;
 }
 
 .actionBar button {
@@ -41,7 +41,7 @@
 .portfolioList ul#portfolios{
   border-top: 1px solid #eee;
   overflow-y: scroll;
-  height: calc(100vh - 72px);
+  height: 80rem;
   list-style: none;
   margin-top: 1em;
   padding: 0;
@@ -59,7 +59,7 @@
 }
 
 .portfolioList ul#portfolios>li {
-  height: 100px;
+  height: 100%;
   font-size: 90%;
   cursor: pointer;
   overflow: hidden;
@@ -140,8 +140,8 @@
 }
 
 .remove-portfolio {
-  position: absolute;
-  right: 3rem;
+  position: relative;
+  
   background: none;
   border: none;
 }

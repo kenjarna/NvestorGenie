@@ -28,7 +28,8 @@ class App extends Component {
     }
 
     componentDidMount() {
-        if (Object.keys(localStorage.getItem('portfolios')).length !== 2) {
+        let ls = localStorage.getItem('portfolios');
+        if (ls !== null && Object.keys(ls).length !== 2) {
             const portfolios = JSON.parse(localStorage.getItem('portfolios'));
             this.setState({ portfolios: {} });
             let loadedPortfolioList = this.createPortfolioObjects(portfolios);        
@@ -66,12 +67,15 @@ class App extends Component {
     }
 
     savePortfolio = (data) => {
-        const portfolios = { ...this.state.portfolios };
+        const portfolios = this.state.portfolios;
+        const key = Object.keys(portfolios).find(key=> portfolios[key] === data);
+        delete portfolios[key];
         if (!Object.keys(portfolios).includes(data.id)) {
             portfolios[data.id] = data;
+            this.setState({ portfolios });
+            this.saveToLocalStorage();
         }
-        this.setState({ portfolios });
-        this.saveToLocalStorage();
+
     }
 
     saveToLocalStorage = () => {
