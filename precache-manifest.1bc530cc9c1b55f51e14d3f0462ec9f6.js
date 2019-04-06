@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/NvestorGenie/static/css/main.c70dd599.chunk.css"
   },
   {
-    "revision": "e94e80816b26059b6831ad3ef58a2a90",
+    "revision": "a6b37588e2c00bd1d7118dc91dd25027",
     "url": "/NvestorGenie/index.html"
   }
 ];
